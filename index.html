@@ -1,1066 +1,303 @@
 <!DOCTYPE html>
-
-<html lang="ro">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Daniel Balaș — Website Oficial Fan</title>
+  <title>Daniel Balaș — Fan Website</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <!-- Smartsupp Live Chat -->
-
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'YOUR_SMARTSUPP_KEY';
-    window.smartsupp||(function(d) {
-      var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-      s=d.createElement('script');s.type='text/javascript';s.charset='utf-8';s.async=true;
-      s.src='https://www.smartsuppchat.com/loader.js?';c=d.getElementsByTagName('script')[0];
-      c.parentNode.insertBefore(s,c);
-    })(document);
-  </script>
+ <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '6748f4bf4ee1856e37c46ef3e1bac04a71202e10';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+<noscript>Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            gold: { 100:'#fef9ec',200:'#fde68a',300:'#fbbf24',400:'#d4a017',500:'#b8860b',600:'#8b6914',700:'#5c4409' },
-            ink:  { 50:'#f0ede8',100:'#d5cfc7',900:'#080808',800:'#0f0f0f',700:'#161616',600:'#1e1e1e',500:'#272727',400:'#333333' },
+            gold: '#d4a017',
+            dark: '#080808',
+            light: '#d5cfc7'
           },
           fontFamily: {
-            display: ['"Playfair Display"','Georgia','serif'],
-            accent:  ['"Cormorant Garamond"','Georgia','serif'],
-            body:    ['"DM Sans"','system-ui','sans-serif'],
-          },
+            display: ['"Playfair Display"', 'serif'],
+            body: ['"DM Sans"', 'sans-serif']
+          }
         }
       }
     }
   </script>
 
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:#080808;color:#d5cfc7;font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-    ::selection{background:#d4a017;color:#000}
-    ::-webkit-scrollbar{width:5px}
-    ::-webkit-scrollbar-track{background:#0f0f0f}
-    ::-webkit-scrollbar-thumb{background:#d4a017;border-radius:2px}
-
-    .ggt{background:linear-gradient(135deg,#fbbf24 0%,#d4a017 35%,#f0d060 65%,#b8860b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");opacity:.45}
-
-    #cglow{width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.055),transparent 65%);position:fixed;pointer-events:none;z-index:9996;transform:translate(-50%,-50%);transition:left .08s linear,top .08s linear}
-
-    #nav{position:fixed;top:0;left:0;right:0;z-index:9000;padding:1.25rem 1.5rem;transition:background .4s,border-color .4s,padding .4s}
-    #nav.scrolled{background:rgba(8,8,8,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(212,160,23,.14);padding-top:.85rem;padding-bottom:.85rem}
-    .nl{position:relative;font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#6b6560;transition:color .3s}
-    .nl::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:#d4a017;transition:width .35s cubic-bezier(.16,1,.3,1)}
-    .nl:hover{color:#d4a017}
-    .nl:hover::after{width:100%}
-
-    #hero{min-height:100vh;position:relative;display:flex;align-items:center;background:radial-gradient(ellipse 80% 55% at 65% 35%,rgba(212,160,23,.09),transparent 65%),radial-gradient(ellipse 55% 70% at 5% 85%,rgba(212,160,23,.05),transparent 55%),linear-gradient(165deg,#000,#0b0b00 50%,#080800)}
-    #hero::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a017' fill-opacity='0.022' fill-rule='evenodd'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-
-    .orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.35),transparent 70%);animation:orb 9s ease-in-out infinite;pointer-events:none}
-    @keyframes orb{0%,100%{transform:translateY(0) scale(1);opacity:.3}50%{transform:translateY(-28px) scale(1.08);opacity:.55}}
-
-    .rv,.rl,.rr{opacity:0;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-    .rv{transform:translateY(36px)}.rl{transform:translateX(-48px)}.rr{transform:translateX(48px)}
-    .rv.vis,.rl.vis,.rr.vis{opacity:1;transform:translate(0)}
-    .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-    .d4{transition-delay:.32s}.d5{transition-delay:.40s}.d6{transition-delay:.48s}
-
-    .bp{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:.9rem 2rem;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s}
-    .bp::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#fbbf24,#d4a017);opacity:0;transition:opacity .3s}
-    .bp:hover::before{opacity:1}
-    .bp:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(212,160,23,.38)}
-    .bp>*{position:relative;z-index:1}
-    .bg-btn{display:inline-flex;align-items:center;gap:.55rem;background:transparent;border:1px solid rgba(212,160,23,.5);color:#d4a017;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:.9rem 2rem;cursor:pointer;transition:background .3s,border-color .3s,transform .3s,box-shadow .3s}
-    .bg-btn:hover{background:rgba(212,160,23,.09);border-color:#d4a017;transform:translateY(-2px);box-shadow:0 6px 25px rgba(212,160,23,.15)}
-    .bt{display:inline-flex;align-items:center;gap:.5rem;color:#5c5550;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .3s;background:none;border:none}
-    .bt:hover{color:#d4a017}
-
-    .card{background:linear-gradient(145deg,rgba(22,22,22,.95),rgba(14,14,14,.95));border:1px solid rgba(212,160,23,.1);transition:border-color .4s,transform .4s,box-shadow .4s}
-    .card:hover{border-color:rgba(212,160,23,.35);transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 40px rgba(212,160,23,.08)}
-    .card-glow{border:1px solid rgba(212,160,23,.5);box-shadow:0 0 50px rgba(212,160,23,.1)}
-
-    .sl{display:inline-flex;align-items:center;gap:.75rem;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#d4a017}
-    .sl::before,.sl::after{content:'';width:24px;height:1px;background:#d4a017;opacity:.6}
-    .sr{width:72px;height:1px;background:linear-gradient(90deg,transparent,#d4a017,transparent);margin:1.25rem auto 0}
-
-    .mq-wrap{overflow:hidden}
-    .mq-inner{display:flex;gap:2.5rem;white-space:nowrap;animation:mq 22s linear infinite}
-    .mq-inner:hover{animation-play-state:paused}
-    @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    .tl-dot{position:absolute;left:0;top:10px;width:11px;height:11px;border-radius:50%;background:#d4a017;transform:translateX(-5px);box-shadow:0 0 12px rgba(212,160,23,.5)}
-    .tl-pulse{animation:pdot 2s ease-in-out infinite}
-    @keyframes pdot{0%,100%{box-shadow:0 0 8px rgba(212,160,23,.4)}50%{box-shadow:0 0 22px rgba(212,160,23,.9)}}
-
-    .mthumb{position:relative;overflow:hidden}
-    .mthumb .tbg{width:100%;aspect-ratio:16/9;transition:transform .55s}
-    .mthumb:hover .tbg{transform:scale(1.06)}
-    .pring{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-    .pbtn{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(212,160,23,.5);background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;color:#d4a017;font-size:1.1rem;padding-left:3px;transition:transform .4s,border-color .4s,background .4s}
-    .mthumb:hover .pbtn{transform:scale(1.12);border-color:#d4a017;background:rgba(212,160,23,.12)}
-    .movl{position:absolute;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
-    .mthumb:hover .movl{opacity:1}
-
-    .pf{background:linear-gradient(145deg,rgba(212,160,23,.1),rgba(184,134,11,.05));border:1px solid rgba(212,160,23,.45);box-shadow:0 0 60px rgba(212,160,23,.08)}
-    .pbadge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.3rem 1rem}
-
-    .ff{width:100%;background:rgba(22,22,22,.9);border:1px solid rgba(212,160,23,.18);color:#d5cfc7;font-family:'DM Sans',sans-serif;font-size:.875rem;padding:.8rem 1rem;outline:none;transition:border-color .3s,box-shadow .3s}
-    .ff:focus{border-color:#d4a017;box-shadow:0 0 0 3px rgba(212,160,23,.1)}
-    .ff::placeholder{color:rgba(213,207,199,.25)}
-    .ff option{background:#161616;color:#d5cfc7}
-    .fl{display:block;font-family:'DM Sans',sans-serif;font-size:.64rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#5c5550;margin-bottom:.5rem}
-
-    .tt{display:flex;transition:transform .65s cubic-bezier(.16,1,.3,1)}
-
-    .pbfill{height:100%;border-radius:999px;background:linear-gradient(90deg,#b8860b,#d4a017,#fbbf24);transition:width 1.6s cubic-bezier(.16,1,.3,1)}
-
-    .fc{background:linear-gradient(145deg,#110e00,#0a0800,#100d00);border:1px solid rgba(212,160,23,.38);box-shadow:0 0 70px rgba(212,160,23,.12);border-radius:12px;padding:1.75rem;position:relative;overflow:hidden}
-    .fc::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.12),transparent 70%);pointer-events:none}
-    .fchip{width:42px;height:32px;border-radius:5px;border:1px solid rgba(212,160,23,.3);background:rgba(212,160,23,.06);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:5px}
-    .fchip>span{background:rgba(212,160,23,.3);border-radius:2px}
-
-    .fsoc{width:38px;height:38px;border:1px solid rgba(212,160,23,.2);display:flex;align-items:center;justify-content:center;color:rgba(212,160,23,.45);font-size:.85rem;transition:color .3s,border-color .3s,background .3s}
-    .fsoc:hover{color:#d4a017;border-color:#d4a017;background:rgba(212,160,23,.07)}
-
-    .disc{background:rgba(212,160,23,.04);border:1px solid rgba(212,160,23,.16);border-left:3px solid rgba(212,160,23,.5);padding:1.1rem 1.25rem}
-    .sdiv{width:1px;background:linear-gradient(to bottom,transparent,rgba(212,160,23,.22),transparent)}
-    .ic{width:40px;height:40px;border-radius:50%;background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.22);display:flex;align-items:center;justify-content:center;color:#d4a017;font-size:.8rem;flex-shrink:0}
-    .vtxt{writing-mode:vertical-rl;font-family:'DM Sans',sans-serif;font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:rgba(212,160,23,.28)}
-    .qi{width:36px;height:36px;border-radius:50%;background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.2);display:flex;align-items:center;justify-content:center;color:rgba(212,160,23,.55);font-size:.7rem;flex-shrink:0;margin-bottom:1rem}
-
-    /* Chat trigger button */
-    .chat-trigger{background:transparent;border:1px solid rgba(212,160,23,.5);color:#d4a017;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:.9rem 2rem;cursor:pointer;display:inline-flex;align-items:center;gap:.55rem;transition:background .3s,border-color .3s,transform .3s,box-shadow .3s}
-    .chat-trigger:hover{background:rgba(212,160,23,.09);border-color:#d4a017;transform:translateY(-2px);box-shadow:0 6px 25px rgba(212,160,23,.15)}
-    .chat-trigger.primary{background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;border:none;position:relative;overflow:hidden}
-    .chat-trigger.primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#fbbf24,#d4a017);opacity:0;transition:opacity .3s}
-    .chat-trigger.primary:hover::before{opacity:1}
-    .chat-trigger.primary>*{position:relative;z-index:1}
-    .chat-trigger.primary:hover{box-shadow:0 10px 35px rgba(212,160,23,.38)}
-
-    .sci{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;animation:scibob 2.2s ease-in-out infinite}
-    @keyframes scibob{0%,100%{transform:translateX(-50%) translateY(0);opacity:.45}50%{transform:translateX(-50%) translateY(7px);opacity:1}}
-    .pp{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(212,160,23,.2);color:#7a7268;font-family:'DM Sans',sans-serif;font-size:.75rem;letter-spacing:.1em;padding:.5rem .9rem;transition:color .3s,border-color .3s,background .3s;text-decoration:none}
-    .pp:hover{color:#d4a017;border-color:rgba(212,160,23,.5);background:rgba(212,160,23,.05)}
-    .badge{font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.25rem .65rem;border:1px solid}
-    .bg-g{color:#4ade80;border-color:rgba(74,222,128,.3)}
-    .bg-a{color:#fbbf24;border-color:rgba(251,191,36,.3)}
-    .bg-b{color:#60a5fa;border-color:rgba(96,165,250,.3)}
+    body { 
+      background: #080808; 
+      color: #d5cfc7; 
+      font-family: 'DM Sans', sans-serif; 
+    }
+    .ggt { 
+      background: linear-gradient(135deg, #fbbf24, #d4a017); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+    }
+    .card { 
+      background: rgba(22, 22, 22, 0.95); 
+      border: 1px solid rgba(212, 160, 23, 0.2); 
+      transition: all 0.4s ease; 
+    }
+    .card:hover { 
+      border-color: #d4a017; 
+      transform: translateY(-6px); 
+    }
+    .btn-gold { 
+      background: linear-gradient(135deg, #d4a017, #b8860b); 
+      color: #000; 
+      font-weight: 600; 
+      transition: all 0.3s; 
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 160, 23, 0.4);
+    }
+    .btn-outline { 
+      border: 1px solid rgba(212, 160, 23, 0.6); 
+      color: #d4a017; 
+    }
+    .btn-outline:hover {
+      background: rgba(212, 160, 23, 0.1);
+    }
   </style>
-
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-<div id="cglow"></div>
-
-<!-- ════════ NAV ════════ -->
-
-<nav id="nav">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <a href="#hero" class="flex items-center gap-2.5 group">
-      <span class="w-7 h-7 border flex items-center justify-center group-hover:border-gold-400 transition-colors" style="border-color:rgba(212,160,23,.45);">
-        <i class="fas fa-cross text-gold-400" style="font-size:.7rem;"></i>
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#080808]/95 backdrop-blur-md border-b border-gold/20">
+  <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <span class="w-8 h-8 border border-gold/50 flex items-center justify-center rounded">
+        <i class="fas fa-cross text-gold text-sm"></i>
       </span>
-      <span class="font-display text-base font-black ggt tracking-wider leading-none">Daniel Bala&#537;</span>
+      <span class="font-display text-2xl font-bold ggt tracking-wider">Daniel Balaș</span>
     </a>
-    <ul class="hidden lg:flex items-center gap-7">
-      <li><a href="#about"      class="nl">Povestea</a></li>
-      <li><a href="#carte"      class="nl">Carte</a></li>
-      <li><a href="#media"      class="nl">Media</a></li>
-      <li><a href="#events"     class="nl">Evenimente</a></li>
-      <li><a href="#meetgreet"  class="nl">Meet &amp; Greet</a></li>
-      <li><a href="#membership" class="nl">Fan Club</a></li>
-      <li><a href="#donation"   class="nl">Suport</a></li>
-    </ul>
-    <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv o apari&#x21B;ie cu Daniel Bala&#537;.')" class="hidden lg:inline-flex bp" style="font-size:.7rem;padding:.75rem 1.5rem;">
-      <i class="fas fa-calendar-check"></i><span>Rezerv&#x103; Acum</span>
-    </button>
-    <button id="menu-btn" aria-label="Meniu" class="lg:hidden w-9 h-9 border flex items-center justify-center text-gold-400 hover:border-gold-400 transition-colors" style="border-color:rgba(212,160,23,.3);">
-      <i class="fas fa-bars text-sm" id="menu-ico"></i>
-    </button>
-  </div>
-  <div id="mob-menu" class="hidden lg:hidden mt-4 pt-4 border-t" style="border-color:rgba(212,160,23,.15);">
-    <ul class="flex flex-col gap-1 mb-4">
-      <li><a href="#about"      class="mnl block py-2 nl">Povestea</a></li>
-      <li><a href="#carte"      class="mnl block py-2 nl">Carte</a></li>
-      <li><a href="#media"      class="mnl block py-2 nl">Media</a></li>
-      <li><a href="#events"     class="mnl block py-2 nl">Evenimente</a></li>
-      <li><a href="#meetgreet"  class="mnl block py-2 nl">Meet &amp; Greet</a></li>
-      <li><a href="#membership" class="mnl block py-2 nl">Fan Club</a></li>
-      <li><a href="#donation"   class="mnl block py-2 nl">Suport</a></li>
-    </ul>
-    <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv.')" class="mnl bp w-full justify-center" style="font-size:.7rem;padding:.75rem 1.5rem;">
-      <i class="fas fa-calendar-check"></i><span>Rezerv&#x103; Acum</span>
+    
+    <div class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest">
+      <a href="#story" class="hover:text-gold transition-colors">Story</a>
+      <a href="#book" class="hover:text-gold transition-colors">Book</a>
+      <a href="#events" class="hover:text-gold transition-colors">Events</a>
+      <a href="#meet" class="hover:text-gold transition-colors">Meet & Greet</a>
+    </div>
+
+    <button onclick="openChat('Hello! I would like to book an appearance with Daniel Balaș.')" 
+            class="btn-gold px-6 py-3 rounded text-sm flex items-center gap-2">
+      <i class="fas fa-calendar-check"></i>
+      <span>Book Now</span>
     </button>
   </div>
 </nav>
 
-<!-- ════════ HERO ════════ -->
-
-<section id="hero">
-  <div class="orb w-80 h-80 top-16 right-16 opacity-30" style="animation-delay:0s;"></div>
-  <div class="orb w-44 h-44 bottom-40 left-24 opacity-20" style="animation-delay:3.5s;"></div>
-  <div class="orb w-24 h-24 opacity-15" style="top:50%;right:33%;animation-delay:6s;"></div>
-
-  <div class="relative z-10 max-w-7xl mx-auto px-6 flex items-center min-h-screen py-36 md:py-0">
-    <div class="max-w-3xl">
-      <div class="rv mb-8">
-        <span class="sl">Fost Preot &nbsp;&bull;&nbsp; Creator de Con&#x21B;inut &nbsp;&bull;&nbsp; Scriitor</span>
-      </div>
-      <h1 class="font-display font-black leading-none mb-7">
-        <span class="rv d1 block text-white" style="font-size:clamp(3.5rem,9vw,7.5rem);">Daniel</span>
-        <span class="rv d2 block ggt"        style="font-size:clamp(3.5rem,9vw,7.5rem);">Bala&#537;</span>
-      </h1>
-      <p class="rv d3 font-accent text-xl md:text-2xl leading-relaxed mb-3 max-w-xl" style="color:rgba(213,207,199,.65);font-style:italic;">
-        &#8220;Doar c&acirc;nd &icirc;ncepi s&#x103; te iube&#x219;ti a&#x219;a cum te iube&#x219;te Dumnezeu, &icirc;&#x21B;i sco&#x21B;i la lumin&#x103; diamantul dumnezeirii din tine.&#8221;
-      </p>
-      <p class="rv d4 font-body text-sm md:text-base leading-relaxed mb-10 max-w-lg" style="color:rgba(213,207,199,.38);">
-        Din sutana preot&#x103;iei la cabina de TIR, &#x219;i de acolo la milioane de urm&#x103;ritori &#8212; povestea cea mai autentic&#x103; din Rom&acirc;nia online.
-      </p>
-      <div class="rv d5 flex flex-wrap items-center gap-4">
-        <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv o apari&#x21B;ie.')" class="bp"><i class="fas fa-calendar-check"></i><span>Rezerv&#x103; Acum</span></button>
-        <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; particip la Meet &amp; Greet.')" class="bg-btn"><i class="fas fa-handshake"></i><span>Meet &amp; Greet</span></button>
-        <a href="#about" class="bt"><span>Descoper&#x103; Povestea</span><i class="fas fa-arrow-down text-xs"></i></a>
-      </div>
-      <div class="rv d6 flex flex-wrap items-center gap-8 mt-16 pt-8" style="border-top:1px solid rgba(255,255,255,.04);">
-        <div>
-          <div class="font-display text-3xl font-black ggt leading-none">62.6M<span class="text-2xl">+</span></div>
-          <div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.28);">Vizualiz&#x103;ri TikTok</div>
-        </div>
-        <div class="sdiv h-10 self-center hidden sm:block"></div>
-        <div>
-          <div class="font-display text-3xl font-black ggt leading-none">118K<span class="text-2xl">+</span></div>
-          <div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.28);">Urm&#x103;ritori Facebook</div>
-        </div>
-        <div class="sdiv h-10 self-center hidden sm:block"></div>
-        <div>
-          <div class="font-display text-3xl font-black ggt leading-none">29K<span class="text-2xl">+</span></div>
-          <div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.28);">Abonat YouTube</div>
-        </div>
-      </div>
-    </div>
-    <div class="hidden xl:flex absolute right-10 top-1/2 -translate-y-1/2 flex-col items-center gap-4">
-      <div class="w-px h-20" style="background:linear-gradient(to bottom,transparent,rgba(212,160,23,.28))"></div>
-      <span class="vtxt">Credin&#x21B;&#x103; &middot; Adev&#x103;r &middot; Transformare</span>
-      <div class="w-px h-20" style="background:linear-gradient(to top,transparent,rgba(212,160,23,.28))"></div>
-    </div>
-  </div>
-  <div class="sci">
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.32);">Scroll</span>
-    <i class="fas fa-chevron-down text-xs" style="color:rgba(212,160,23,.32);"></i>
-  </div>
-</section>
-
-<!-- ════════ MARQUEE ════════ -->
-
-<div class="mq-wrap border-y py-3.5" style="border-color:rgba(212,160,23,.18);background:#0f0f0f;">
-  <div class="mq-inner">
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Daniel Bala&#537;</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Creator de Con&#x21B;inut</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Constan&#x21B;a</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Scriitor</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Adev&#x103;rul din spatele Sutanei</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Un Suflet C&#x103;l&#x103;tor</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <!-- duplicate -->
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Daniel Bala&#537;</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Creator de Con&#x21B;inut</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Constan&#x21B;a</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Scriitor</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Adev&#x103;rul din spatele Sutanei</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-    <span class="font-body text-xs tracking-widest uppercase" style="color:rgba(212,160,23,.45);">Un Suflet C&#x103;l&#x103;tor</span>
-    <span style="color:rgba(212,160,23,.2);display:inline-flex;align-items:center;"><i class="fas fa-diamond" style="font-size:.35rem;"></i></span>
-  </div>
-</div>
-
-<!-- ════════ ABOUT ════════ -->
-
-<section id="about" class="py-28 px-6">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-20">
-      <div class="rv"><span class="sl">Povestea Sa</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Drumul lui Daniel</h2>
-      <div class="sr"></div>
-    </div>
-    <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
-
-```
-  <!-- Bio -->
-  <div class="rl">
-    <p class="font-accent text-xl md:text-2xl leading-relaxed mb-6" style="color:rgba(213,207,199,.62);font-style:italic;">
-      Mihail-Daniel Bala&#537; s-a n&#x103;scut &icirc;n Constan&#x21B;a &#x219;i a urmat Facultatea de Teologie, pl&#x103;tind aproape 20.000 de euro pentru studii &#8212; bani str&acirc;n&#x219;i muncind &icirc;n Anglia &#8212; cu visul de a deveni preot.
+<!-- HERO -->
+<section class="min-h-screen flex items-center pt-20 bg-gradient-to-br from-black via-[#0a0800] to-black">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <p class="uppercase tracking-[0.25em] text-gold text-sm mb-6">Former Priest • Creator • Author</p>
+    
+    <h1 class="font-display text-7xl md:text-[5.5rem] font-black leading-none mb-8">
+      Daniel<br><span class="ggt">Balaș</span>
+    </h1>
+    
+    <p class="max-w-lg mx-auto text-xl text-light/70 italic mb-12">
+      “Only when you start loving yourself the way God loves you, do you reveal the diamond of divinity within you.”
     </p>
-    <p class="font-body text-sm md:text-base leading-loose mb-4" style="color:rgba(213,207,199,.42);">
-      Hirotonit preot &icirc;n Arhiepiscopia Tomisului, a slujit cu pasiune la Ivrinezu Mic, un sat de 100 de suflete la 80 km de Constan&#x21B;a, f&#x103;r&#x103; salariu &#x219;i f&#x103;r&#x103; cas&#x103; parohial&#x103;. Dup&#x103; 8 luni &icirc;n care a cerut sprijin f&#x103;r&#x103; r&#x103;spuns, a demisionat.
-    </p>
-    <p class="font-body text-sm md:text-base leading-loose mb-4" style="color:rgba(213,207,199,.42);">
-      A luat calea str&#x103;in&#x103;t&#x103;&#x21B;ii &#x219;i a condus TIR-ul &icirc;n Anglia ani &icirc;ntregi, str&acirc;ng&acirc;nd bani pentru o via&#x21B;&#x103; nou&#x103;. &Icirc;n paralel, a &icirc;nceput s&#x103; vorbeasc&#x103; deschis pe re&#x21B;elele sociale despre neregulile din BOR &#8212; iar lumea a &icirc;nceput s&#x103;-l asculte.
-    </p>
-    <p class="font-body text-sm md:text-base leading-loose mb-4" style="color:rgba(213,207,199,.42);">
-      &Icirc;n 2022 a fost caterisit de Arhiepiscopia Tomisului. &Icirc;n 2023 &#x219;i-a publicat cartea <em>&#8222;Adev&#x103;rul din spatele sutanei&#8221;</em> &#x219;i a l&#x103;sat definitiv volanul camionului, dedicindu-se con&#x21B;inutului online.
-    </p>
-    <p class="font-body text-sm md:text-base leading-loose mb-4" style="color:rgba(213,207,199,.42);">
-      La 29 de ani, cu milioane de vizualiz&#x103;ri pe TikTok, un Lamborghini Hurac&#x103;n, &#x219;i tatuaje &icirc;n loc de sotana, Daniel este vocea Rom&acirc;niei care refuz&#x103; s&#x103; tac&#x103;.
-    </p>
-    <!-- Quote -->
-    <div class="border-l-2 border-gold-400/40 pl-5 my-8">
-      <p class="font-accent text-lg italic" style="color:rgba(213,207,199,.55);">
-        &#8220;Nu mersul la biseric&#x103; te face credincios, a&#x219;a cum nici statul &icirc;n garaj nu te face ma&#x219;in&#x103;.&#8221;
-      </p>
-      <p class="font-body text-xs mt-2 text-gold-500 tracking-widest uppercase">&#8212; Daniel Bala&#537;</p>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <a href="https://www.tiktok.com/@danielbls1" target="_blank" class="pp"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
-      <a href="https://www.youtube.com/@danielbalas" target="_blank" class="pp"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-      <a href="https://www.facebook.com/mihaidaniel.balas" target="_blank" class="pp"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
-      <a href="https://www.instagram.com/danielbalas15/" target="_blank" class="pp"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-    </div>
-  </div>
 
-  <!-- Timeline -->
-  <div class="rr">
-    <div class="relative pl-8 pb-10">
-      <div class="absolute left-0 top-0 bottom-0 w-px" style="background:linear-gradient(to bottom,#d4a017,rgba(212,160,23,.08));"></div>
-      <div class="tl-dot"></div>
-      <div class="card rounded-none p-5">
-        <div class="flex items-center gap-2 mb-2"><div class="ic" style="width:26px;height:26px;font-size:.6rem;"><i class="fas fa-church"></i></div><span class="font-body text-xs tracking-widest uppercase" style="color:#d4a017;">Origini</span></div>
-        <h3 class="font-display text-lg text-white mb-2">Vocatia Preoției</h3>
-        <p class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.42);">N&#x103;scut &icirc;n Constan&#x21B;a, a urmat Facultatea de Teologie &#x219;i a pl&#x103;tit ~20.000 EUR pentru studii, lucr&acirc;nd &icirc;n Anglia pentru a-&#x219;i finan&#x21B;a visul de a deveni preot.</p>
-      </div>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button onclick="openChat('Hello! I want to book a Meet & Greet with Daniel.')" 
+              class="btn-gold px-10 py-5 text-lg flex items-center justify-center gap-3">
+        <i class="fas fa-handshake"></i> Meet & Greet
+      </button>
+      <a href="#story" 
+         class="btn-outline px-10 py-5 text-lg flex items-center justify-center gap-3 hover:bg-white/5">
+        His Story <i class="fas fa-arrow-down"></i>
+      </a>
     </div>
-    <div class="relative pl-8 pb-10">
-      <div class="absolute left-0 top-0 bottom-0 w-px" style="background:linear-gradient(to bottom,#d4a017,rgba(212,160,23,.08));"></div>
-      <div class="tl-dot"></div>
-      <div class="card rounded-none p-5">
-        <div class="flex items-center gap-2 mb-2"><div class="ic" style="width:26px;height:26px;font-size:.6rem;"><i class="fas fa-scroll"></i></div><span class="font-body text-xs tracking-widest uppercase" style="color:#d4a017;">2021 &#8212; Suspendare</span></div>
-        <h3 class="font-display text-lg text-white mb-2">Conflictul cu BOR</h3>
-        <p class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.42);">Suspendat de Arhiepiscopia Tomisului pentru declara&#x21B;ii publice considerate prea libere. &Icirc;ncepe s&#x103; dezvoluie online neregulile din Biseric&#x103;. &Icirc;&#x219;i d&#x103; demisia dup&#x103; 8 luni f&#x103;r&#x103; salariu.</p>
-      </div>
-    </div>
-    <div class="relative pl-8 pb-10">
-      <div class="absolute left-0 top-0 bottom-0 w-px" style="background:linear-gradient(to bottom,#d4a017,rgba(212,160,23,.08));"></div>
-      <div class="tl-dot"></div>
-      <div class="card rounded-none p-5">
-        <div class="flex items-center gap-2 mb-2"><div class="ic" style="width:26px;height:26px;font-size:.6rem;"><i class="fas fa-truck"></i></div><span class="font-body text-xs tracking-widest uppercase" style="color:#d4a017;">2022 &#8212; &#350;oferul de TIR</span></div>
-        <h3 class="font-display text-lg text-white mb-2">Caterisit &amp; Plecat</h3>
-        <p class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.42);">Caterisit oficial de BOR. Conduce TIR-ul &icirc;n Anglia ani &icirc;ntregi, adun&acirc;nd bani pentru o via&#x21B;&#x103; nou&#x103;. Continu&#x103; dezvoluirile pe re&#x21B;elele sociale cu &#x219;i mai mult&#x103; &icirc;ndr&#x103;zneal&#x103;.</p>
-      </div>
-    </div>
-    <div class="relative pl-8 pb-10">
-      <div class="absolute left-0 top-0 bottom-0 w-px" style="background:linear-gradient(to bottom,#d4a017,rgba(212,160,23,.08));"></div>
-      <div class="tl-dot"></div>
-      <div class="card rounded-none p-5">
-        <div class="flex items-center gap-2 mb-2"><div class="ic" style="width:26px;height:26px;font-size:.6rem;"><i class="fas fa-book"></i></div><span class="font-body text-xs tracking-widest uppercase" style="color:#d4a017;">2023 &#8212; Scriitorul</span></div>
-        <h3 class="font-display text-lg text-white mb-2">Cartea &amp; Libertatea</h3>
-        <p class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.42);">Lanseaz&#x103; <em>&#8222;Adev&#x103;rul din spatele sutanei&#8221;</em> &#8212; o carte despre autenticitate, libertate &#x219;i secretele BOR. Las&#x103; definitiv volanul camionului &#x219;i se dedic&#x103; &icirc;n totalitate online.</p>
-      </div>
-    </div>
-    <div class="relative pl-8">
-      <div class="tl-dot tl-pulse"></div>
-      <div class="card-glow rounded-none p-5" style="background:linear-gradient(145deg,rgba(22,22,22,.95),rgba(14,14,14,.95));">
-        <div class="flex items-center gap-2 mb-2"><div class="ic" style="width:26px;height:26px;font-size:.6rem;"><i class="fas fa-microphone-lines"></i></div><span class="font-body text-xs tracking-widest uppercase" style="color:#fbbf24;">Prezent</span></div>
-        <h3 class="font-display text-lg text-white mb-2">Vocea Genera&#x21B;iei</h3>
-        <p class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.42);">Milioane de vizualiz&#x103;ri, seminare online, Lamborghini Hurac&#x103;n &#x219;i o voce care polarizeaz&#x103; Rom&acirc;nia. Tatl a murit &icirc;n 2020 c&acirc;nd Daniel avea 25 ani &#8212; o durere pe care o poart&#x103; cu el public.</p>
-      </div>
-    </div>
-  </div>
-</div>
-```
 
-  </div>
-</section>
-
-<!-- ════════ CARTE ════════ -->
-
-<section id="carte" class="py-28 px-6" style="background:rgba(12,11,8,.85);">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="rv"><span class="sl">Publica&#x21B;ie</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Cartea Sa</h2>
-      <div class="sr"></div>
-    </div>
-    <div class="grid lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
-      <!-- Book cover visual -->
-      <div class="rv rl flex justify-center">
-        <div class="relative max-w-xs w-full">
-          <div class="rounded-lg overflow-hidden shadow-2xl" style="background:linear-gradient(145deg,#f5e6c8,#e8d5a3);padding:2.5rem 2rem;border:1px solid rgba(212,160,23,.4);box-shadow:0 0 80px rgba(212,160,23,.2),0 30px 60px rgba(0,0,0,.8);">
-            <div class="text-center">
-              <div class="w-16 h-px mx-auto mb-4" style="background:#5c4409;"></div>
-              <p class="font-body text-xs uppercase tracking-widest mb-3" style="color:#5c4409;">Daniel Bala&#537;</p>
-              <h3 class="font-display text-2xl font-black leading-tight mb-2" style="color:#2a1f00;">Adev&#x103;rul</h3>
-              <p class="font-accent text-lg italic mb-1" style="color:#5c4409;">din spatele</p>
-              <h3 class="font-display text-3xl font-black" style="color:#2a1f00;">SUTANEI</h3>
-              <div class="w-16 h-px mx-auto mt-4" style="background:#5c4409;"></div>
-              <div class="mt-6 w-12 h-12 mx-auto border-2 flex items-center justify-center rounded-full" style="border-color:#5c4409;">
-                <i class="fas fa-cross" style="color:#5c4409;font-size:1.2rem;"></i>
-              </div>
-            </div>
-          </div>
-          <!-- Price tag -->
-          <div class="absolute -bottom-4 -right-4 w-16 h-16 rounded-full flex items-center justify-center font-display font-black" style="background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;font-size:.75rem;">
-            55<br/><span style="font-size:.5rem;font-family:DM Sans;">lei</span>
-          </div>
-        </div>
+    <div class="mt-20 grid grid-cols-3 gap-8 max-w-xs mx-auto">
+      <div class="text-center">
+        <div class="text-4xl font-display font-bold ggt">360K+</div>
+        <div class="text-xs uppercase tracking-widest text-light/50 mt-1">TikTok</div>
       </div>
-      <!-- Book description -->
-      <div class="rv rr">
-        <div class="mb-2">
-          <span class="font-body text-xs tracking-widest uppercase text-gold-400">Lansat 2023 &nbsp;&bull;&nbsp; eBook + Fizic</span>
-        </div>
-        <h3 class="font-display text-3xl font-black text-white mb-5">
-          &#8222;Adev&#x103;rul din spatele<br/><span class="ggt">Sutanei&#8221;</span>
-        </h3>
-        <p class="font-accent text-lg italic mb-5 leading-relaxed" style="color:rgba(213,207,199,.6);">
-          &#8220;Este un mix de toate &#8212; informa&#x21B;ii benefice &#x219;i utile, tot adev&#x103;rul pe care voi nu &icirc;l &#x219;ti&#x21B;i, nu &icirc;l vede&#x21B;i din cauza rochiilor negre. Amuzament, o s&#x103; r&acirc;de&#x21B;i s&#x103; v&#x103; pr&#x103;bu&#x219;i&#x21B;i.&#8221;
-        </p>
-        <p class="font-body text-sm leading-loose mb-6" style="color:rgba(213,207,199,.4);">
-          O carte de inspira&#x21B;ie &#x219;i &icirc;ncurajare pentru cititori, aduc&acirc;nd un mesaj de acceptare a propriei autenticit&#x103;&#x21B;i &#x219;i de eliberare de constr&acirc;ngerile impuse de p&#x103;rerea celor din jur. Scris&#x103; &icirc;n cuvintele lui Daniel, direct din suflet, cu pasiune &#x219;i transparen&#x21B;&#x103;.
-        </p>
-        <ul class="space-y-3 mb-8">
-          <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Secretele din spatele BOR dezvoluate</li>
-          <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Povestea personal&#x103; &#8212; de la seminar la TIR</li>
-          <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Mesaj de autenticitate &#x219;i libertate interioar&#x103;</li>
-          <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Disponibil&#x103; pe <a href="https://www.danielbalas.com" target="_blank" class="text-gold-400 hover:text-gold-300">danielbalas.com</a></li>
-        </ul>
-        <div class="flex flex-wrap gap-3">
-          <a href="https://www.danielbalas.com/product-page/adev%C4%83rul-din-spatele-sutanei" target="_blank" class="bp">
-            <i class="fas fa-book-open"></i><span>Cump&#x103;r&#x103; Cartea &#8212; 55 lei</span>
-          </a>
-          <button onclick="openChat('Bun&#x103; ziua! Vreau mai multe informa&#x21B;ii despre cartea lui Daniel Bala&#537;.')" class="bg-btn">
-            <i class="fas fa-comment-lines"></i><span>&Icirc;ntreab&#x103; despre carte</span>
-          </button>
-        </div>
+      <div class="text-center">
+        <div class="text-4xl font-display font-bold ggt">71K+</div>
+        <div class="text-xs uppercase tracking-widest text-light/50 mt-1">YouTube</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-display font-bold ggt">590K+</div>
+        <div class="text-xs uppercase tracking-widest text-light/50 mt-1">Facebook</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ MEDIA ════════ -->
-
-<section id="media" class="py-28 px-6" style="background:rgba(15,15,15,.8);">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="rv"><span class="sl">Con&#x21B;inut</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Videos &amp; Con&#x21B;inut</h2>
-      <div class="sr"></div>
+<!-- STORY -->
+<section id="story" class="py-28 bg-[#0f0f0f]">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="font-display text-5xl font-bold text-center mb-12">His Journey</h2>
+    
+    <div class="prose prose-invert max-w-none text-light/80 leading-relaxed space-y-8">
+      <p>Born in Constanța, Romania, Daniel studied theology and worked in England to pay for his education. He was ordained as a priest and served in a small village for 8 months without salary or housing.</p>
+      
+      <p>After facing silence from the church, he resigned and began speaking openly about issues within the Romanian Orthodox Church. He later drove trucks across Europe while building a strong online presence.</p>
+      
+      <p>In 2023 he published his book <span class="font-semibold text-gold">"The Truth Behind the Cassock"</span> and fully dedicated himself to honest content creation.</p>
+      
+      <blockquote class="italic border-l-4 border-gold pl-6 text-light/90">
+        “Going to church doesn’t make you a believer, just like standing in a garage doesn’t make you a car.”
+      </blockquote>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  </div>
+</section>
 
-```
-  <!-- TikTok video 1 -->
-  <a href="https://www.tiktok.com/@danielbls1" target="_blank" class="rv d1 card rounded-none overflow-hidden cursor-pointer group block">
-    <div class="mthumb">
-      <div class="tbg flex items-center justify-center" style="background:linear-gradient(135deg,#1a1200,#0a0800);">
-        <i class="fas fa-cross absolute" style="font-size:6rem;color:rgba(212,160,23,.08);"></i>
+<!-- BOOK -->
+<section id="book" class="py-28 bg-black">
+  <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+    <div class="flex justify-center">
+      <div class="bg-gradient-to-br from-amber-100 to-yellow-200 p-14 shadow-2xl max-w-xs w-full">
+        <div class="text-center text-amber-950">
+          <p class="uppercase text-xs tracking-widest">Daniel Balaș</p>
+          <h3 class="font-display text-4xl font-black mt-3">The Truth</h3>
+          <p class="text-2xl italic">Behind the Cassock</p>
+        </div>
       </div>
-      <div class="pring"><div class="pbtn"><i class="fas fa-play"></i></div></div>
-      <div class="movl"><div class="text-center"><i class="fab fa-tiktok text-gold-400 text-2xl mb-2 block"></i><span class="font-body text-gold-400 text-xs tracking-widest uppercase">Vizualizeaz&#x103; pe TikTok</span></div></div>
-      <div class="absolute bottom-3 left-3" style="background:rgba(0,0,0,.7);padding:.2rem .5rem;"><span class="font-body text-gold-400 text-xs">79.2K like-uri</span></div>
     </div>
-    <div class="p-4">
-      <div class="flex items-center gap-2 mb-2"><i class="fab fa-tiktok text-gold-600 text-xs"></i><span class="font-body text-xs tracking-widest uppercase" style="color:rgba(213,207,199,.3);">TikTok &#8226; @danielbls1</span></div>
-      <h3 class="font-display text-base text-white group-hover:text-gold-300 transition-colors mb-1">M&#x103;rturia unui preot dezinhibat</h3>
-      <p class="font-body text-xs" style="color:rgba(213,207,199,.28);"><i class="fas fa-fire mr-1 text-gold-600"></i>Viral &#8226; #DanielBalas</p>
-    </div>
-  </a>
-
-  <!-- TikTok video 2 -->
-  <a href="https://www.tiktok.com/@danielbls1" target="_blank" class="rv d2 card rounded-none overflow-hidden cursor-pointer group block">
-    <div class="mthumb">
-      <div class="tbg flex items-center justify-center" style="background:linear-gradient(135deg,#0e1200,#080a00);">
-        <i class="fas fa-truck-moving absolute" style="font-size:5rem;color:rgba(212,160,23,.08);"></i>
-      </div>
-      <div class="pring"><div class="pbtn"><i class="fas fa-play"></i></div></div>
-      <div class="movl"><div class="text-center"><i class="fab fa-tiktok text-gold-400 text-2xl mb-2 block"></i><span class="font-body text-gold-400 text-xs tracking-widest uppercase">Vizualizeaz&#x103; pe TikTok</span></div></div>
-      <div class="absolute bottom-3 left-3" style="background:rgba(0,0,0,.7);padding:.2rem .5rem;"><span class="font-body text-gold-400 text-xs">84.9K like-uri</span></div>
-    </div>
-    <div class="p-4">
-      <div class="flex items-center gap-2 mb-2"><i class="fab fa-tiktok text-gold-600 text-xs"></i><span class="font-body text-xs tracking-widest uppercase" style="color:rgba(213,207,199,.3);">TikTok &#8226; @danielbls1</span></div>
-      <h3 class="font-display text-base text-white group-hover:text-gold-300 transition-colors mb-1">Tr&#x103;ie&#x219;te Frumos</h3>
-      <p class="font-body text-xs" style="color:rgba(213,207,199,.28);"><i class="fas fa-fire mr-1 text-gold-600"></i>Viral &#8226; #TraiesteFrumos</p>
-    </div>
-  </a>
-
-  <!-- YouTube video -->
-  <a href="https://www.youtube.com/@danielbalas" target="_blank" class="rv d3 card rounded-none overflow-hidden cursor-pointer group block">
-    <div class="mthumb">
-      <div class="tbg flex items-center justify-center" style="background:linear-gradient(135deg,#12100a,#080806);">
-        <i class="fas fa-book absolute" style="font-size:5rem;color:rgba(212,160,23,.08);"></i>
-      </div>
-      <div class="pring"><div class="pbtn"><i class="fas fa-play"></i></div></div>
-      <div class="movl"><div class="text-center"><i class="fab fa-youtube text-gold-400 text-2xl mb-2 block"></i><span class="font-body text-gold-400 text-xs tracking-widest uppercase">Vizualizeaz&#x103; pe YouTube</span></div></div>
-      <div class="absolute bottom-3 left-3" style="background:rgba(0,0,0,.7);padding:.2rem .5rem;"><span class="font-body text-gold-400 text-xs">29K+ abonat</span></div>
-    </div>
-    <div class="p-4">
-      <div class="flex items-center gap-2 mb-2"><i class="fab fa-youtube text-gold-600 text-xs"></i><span class="font-body text-xs tracking-widest uppercase" style="color:rgba(213,207,199,.3);">YouTube &#8226; @danielbalas</span></div>
-      <h3 class="font-display text-base text-white group-hover:text-gold-300 transition-colors mb-1">P&#x103;catele din Arhiepiscopie</h3>
-      <p class="font-body text-xs" style="color:rgba(213,207,199,.28);"><i class="fas fa-eye mr-1"></i>Dezv&#x103;luiri despre BOR</p>
-    </div>
-  </a>
-
-  <!-- Stats -->
-  <div class="rv d4 card rounded-none p-6 flex flex-col items-center justify-center text-center gap-3">
-    <div class="w-12 h-12 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><i class="fab fa-tiktok text-gold-400 text-xl"></i></div>
+    
     <div>
-      <div class="font-display text-4xl font-black ggt leading-none">62.6M</div>
-      <div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.3);">Vizualiz&#x103;ri TikTok</div>
-    </div>
-  </div>
-  <div class="rv d5 card rounded-none p-6 flex flex-col items-center justify-center text-center gap-3">
-    <div class="w-12 h-12 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><i class="fab fa-facebook-f text-gold-400 text-xl"></i></div>
-    <div>
-      <div class="font-display text-4xl font-black ggt leading-none">118K</div>
-      <div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.3);">Urm&#x103;ritori Facebook</div>
-    </div>
-  </div>
-  <div class="rv d6 card rounded-none p-6 flex flex-col items-center justify-center text-center gap-3">
-    <div class="w-12 h-12 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><i class="fab fa-youtube text-gold-400 text-xl"></i></div>
-    <div>
-      <div class="font-display text-4xl font-black ggt leading-none">29K</div>
-      <div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.3);">Abonat YouTube</div>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ════════ EVENTS ════════ -->
-
-<section id="events" class="py-28 px-6">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="rv"><span class="sl">Apari&#x21B;ii Live</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Evenimente</h2>
-      <p class="rv d2 font-body text-sm leading-relaxed mt-4 max-w-lg mx-auto" style="color:rgba(213,207,199,.38);">Semin&#x103;rii online s&#x103;pt&#x103;m&acirc;nale &#x219;i evenimente live &icirc;n diverse ora&#x219;e din Rom&acirc;nia.</p>
-      <div class="sr"></div>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-```
-  <article class="rv d1 card rounded-none overflow-hidden group">
-    <div class="h-px w-full" style="background:linear-gradient(90deg,#b8860b,#d4a017,#fbbf24);"></div>
-    <div class="p-6">
-      <div class="flex items-start justify-between mb-5">
-        <div><div class="font-display text-5xl font-black ggt leading-none">15</div><div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.32);">August 2025</div></div>
-        <span class="badge bg-g flex items-center gap-1.5"><i class="fas fa-circle" style="font-size:.3rem;"></i>Disponibil</span>
-      </div>
-      <h3 class="font-display text-xl text-white mb-3 group-hover:text-gold-300 transition-colors">Seminar Online Live</h3>
-      <div class="space-y-1.5 mb-5">
-        <p class="font-body text-sm flex items-center gap-2" style="color:rgba(213,207,199,.42);"><i class="fas fa-globe text-gold-600 w-3.5"></i>Online / Zoom</p>
-        <p class="font-body text-sm flex items-center gap-2" style="color:rgba(213,207,199,.42);"><i class="fas fa-clock text-gold-600 w-3.5"></i>20:00 &#8212; 22:00 (EET)</p>
-      </div>
-      <p class="font-body text-sm leading-relaxed mb-6" style="color:rgba(213,207,199,.32);">Seminar s&#x103;pt&#x103;m&acirc;nal cu Daniel &#8212; r&#x103;spunsuri la &icirc;ntreb&#x103;ri, pove&#x219;ti de via&#x21B;&#x103;, &icirc;nv&#x103;&#x21B;&#x103;turi spirituale nefilate.</p>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; m&#x103; &icirc;nscriu la seminarul online din 15 August.')" class="bp w-full justify-center" style="font-size:.68rem;padding:.75rem 1rem;"><i class="fas fa-ticket"></i><span>Rezerv&#x103; Loc</span></button>
-    </div>
-  </article>
-
-  <article class="rv d2 card rounded-none overflow-hidden group">
-    <div class="h-px w-full" style="background:linear-gradient(90deg,#b8860b,#d4a017,#fbbf24);"></div>
-    <div class="p-6">
-      <div class="flex items-start justify-between mb-5">
-        <div><div class="font-display text-5xl font-black ggt leading-none">03</div><div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.32);">Septembrie 2025</div></div>
-        <span class="badge bg-a flex items-center gap-1.5"><i class="fas fa-fire-flame-curved" style="font-size:.65rem;"></i>Pu&#x21B;ine locuri</span>
-      </div>
-      <h3 class="font-display text-xl text-white mb-3 group-hover:text-gold-300 transition-colors">Conversa&#x21B;ii Autentice &#8212; Bucure&#x219;ti</h3>
-      <div class="space-y-1.5 mb-5">
-        <p class="font-body text-sm flex items-center gap-2" style="color:rgba(213,207,199,.42);"><i class="fas fa-location-dot text-gold-600 w-3.5"></i>Bucure&#x219;ti (locul TBD)</p>
-        <p class="font-body text-sm flex items-center gap-2" style="color:rgba(213,207,199,.42);"><i class="fas fa-clock text-gold-600 w-3.5"></i>19:00 &#8212; 22:00</p>
-      </div>
-      <p class="font-body text-sm leading-relaxed mb-6" style="color:rgba(213,207,199,.32);">Sear&#x103; de dialog autentic despre credin&#x21B;&#x103;, &icirc;ndoial&#x103; &#x219;i via&#x21B;&#x103;. Sesiune Q&amp;A inclus&#x103;.</p>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv bilet la evenimentul din Bucure&#x219;ti, 3 Septembrie.')" class="bp w-full justify-center" style="font-size:.68rem;padding:.75rem 1rem;"><i class="fas fa-ticket"></i><span>Rezerv&#x103; Bilet</span></button>
-    </div>
-  </article>
-
-  <article class="rv d3 card rounded-none overflow-hidden group">
-    <div class="h-px w-full" style="background:linear-gradient(90deg,#b8860b,#d4a017,#fbbf24);"></div>
-    <div class="p-6">
-      <div class="flex items-start justify-between mb-5">
-        <div><div class="font-display text-5xl font-black ggt leading-none">21</div><div class="font-body text-xs uppercase tracking-widest mt-1" style="color:rgba(213,207,199,.32);">Octombrie 2025</div></div>
-        <span class="badge bg-b flex items-center gap-1.5"><i class="fas fa-wifi" style="font-size:.65rem;"></i>Online</span>
-      </div>
-      <h3 class="font-display text-xl text-white mb-3 group-hover:text-gold-300 transition-colors">Live Q&amp;A &#8212; Edi&#x21B;ia Digital&#x103;</h3>
-      <div class="space-y-1.5 mb-5">
-        <p class="font-body text-sm flex items-center gap-2" style="color:rgba(213,207,199,.42);"><i class="fas fa-globe text-gold-600 w-3.5"></i>Live Stream / TikTok</p>
-        <p class="font-body text-sm flex items-center gap-2" style="color:rgba(213,207,199,.42);"><i class="fas fa-clock text-gold-600 w-3.5"></i>20:00 &#8212; 22:00 (EET)</p>
-      </div>
-      <p class="font-body text-sm leading-relaxed mb-6" style="color:rgba(213,207,199,.32);">Pune-&#x21B;i &icirc;ntreb&#x103;rile live. Daniel r&#x103;spunde f&#x103;r&#x103; filtre, f&#x103;r&#x103; scripturi, f&#x103;r&#x103; PR.</p>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; particip la Live Q&amp;A din 21 Octombrie.')" class="bp w-full justify-center" style="font-size:.68rem;padding:.75rem 1rem;"><i class="fas fa-ticket"></i><span>Rezerv&#x103; Loc</span></button>
-    </div>
-  </article>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ════════ MEET & GREET ════════ -->
-
-<section id="meetgreet" class="py-28 px-6" style="background:rgba(12,11,8,.85);">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="rv"><span class="sl">Acces Exclusiv</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Meet &amp; Greet</h2>
-      <p class="rv d2 font-body text-sm leading-relaxed mt-4 max-w-lg mx-auto" style="color:rgba(213,207,199,.38);">O &icirc;nt&acirc;lnire personal&#x103; de neuitat cu Daniel. Alege experien&#x21B;a care &#x21B;i se potrive&#x219;te.</p>
-      <div class="sr"></div>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-
-```
-  <!-- Standard -->
-  <div class="rv d1 card rounded-none p-8 flex flex-col">
-    <div class="mb-6">
-      <div class="font-body text-xs uppercase tracking-widest mb-2" style="color:rgba(213,207,199,.32);">Standard</div>
-      <div class="font-display text-5xl font-black text-white leading-none">&euro;49</div>
-      <div class="font-body text-xs mt-1" style="color:rgba(213,207,199,.28);">per persoan&#x103;</div>
-    </div>
-    <div class="w-full h-px mb-6" style="background:rgba(212,160,23,.18);"></div>
-    <ul class="space-y-3 flex-1 mb-8">
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Foto cu Daniel</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Conversa&#x21B;ie 5 minute</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Carte dedicat&#x103;</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.22);"><i class="fas fa-xmark text-xs w-4 flex-shrink-0" style="color:rgba(213,207,199,.2);"></i>Acces prioritar</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.22);"><i class="fas fa-xmark text-xs w-4 flex-shrink-0" style="color:rgba(213,207,199,.2);"></i>Video personalizat</li>
-    </ul>
-    <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv Meet &amp; Greet Standard (&euro;49).')" class="bg-btn w-full justify-center" style="font-size:.68rem;"><i class="fas fa-message"></i><span>Rezerv&#x103; prin Chat</span></button>
-  </div>
-
-  <!-- VIP -->
-  <div class="rv d2 pf rounded-none p-8 flex flex-col relative">
-    <div class="pbadge"><i class="fas fa-crown mr-1.5" style="font-size:.65rem;"></i>Cel mai popular</div>
-    <div class="mb-6 mt-3">
-      <div class="font-body text-xs uppercase tracking-widest mb-2 text-gold-400">VIP</div>
-      <div class="font-display text-5xl font-black ggt leading-none">&euro;149</div>
-      <div class="font-body text-xs mt-1" style="color:rgba(213,207,199,.28);">per persoan&#x103;</div>
-    </div>
-    <div class="w-full h-px mb-6" style="background:rgba(212,160,23,.25);"></div>
-    <ul class="space-y-3 flex-1 mb-8">
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.62);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Tot din Standard</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.62);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Conversa&#x21B;ie 20 minute</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.62);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Intrare &amp; loc prioritar</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.62);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Mesaj video personalizat</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.62);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Acces VIP lounge</li>
-    </ul>
-    <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv Meet &amp; Greet VIP (&euro;149). Cum procedez?')" class="bp w-full justify-center" style="font-size:.68rem;padding:.75rem 1rem;"><i class="fas fa-message"></i><span>Rezerv&#x103; VIP &mdash; &euro;149</span></button>
-  </div>
-
-  <!-- Online -->
-  <div class="rv d3 card rounded-none p-8 flex flex-col">
-    <div class="mb-6">
-      <div class="font-body text-xs uppercase tracking-widest mb-2" style="color:rgba(213,207,199,.32);">Sesiune Online</div>
-      <div class="font-display text-5xl font-black text-white leading-none">&euro;29</div>
-      <div class="font-body text-xs mt-1" style="color:rgba(213,207,199,.28);">per sesiune</div>
-    </div>
-    <div class="w-full h-px mb-6" style="background:rgba(212,160,23,.18);"></div>
-    <ul class="space-y-3 flex-1 mb-8">
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>Video call 1-la-1 (15 min)</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>&Icirc;ntreab&#x103; orice &#8212; f&#x103;r&#x103; filtre</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.55);"><i class="fas fa-check text-gold-400 text-xs w-4 flex-shrink-0"></i>&Icirc;nregistrare trimis&#x103; dup&#x103;</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.22);"><i class="fas fa-xmark text-xs w-4 flex-shrink-0" style="color:rgba(213,207,199,.2);"></i>Foto &icirc;n persoan&#x103;</li>
-      <li class="flex items-center gap-3 font-body text-sm" style="color:rgba(213,207,199,.22);"><i class="fas fa-xmark text-xs w-4 flex-shrink-0" style="color:rgba(213,207,199,.2);"></i>Acces VIP lounge</li>
-    </ul>
-    <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; rezerv Sesiunea Online cu Daniel (&euro;29).')" class="bg-btn w-full justify-center" style="font-size:.68rem;"><i class="fas fa-video"></i><span>Rezerv&#x103; prin Chat</span></button>
-  </div>
-</div>
-
-<!-- Chat notice -->
-<div class="mt-10 max-w-2xl mx-auto text-center rv">
-  <div class="border rounded-none p-4 flex items-center gap-3" style="background:rgba(212,160,23,.04);border-color:rgba(212,160,23,.2);">
-    <i class="fas fa-headset text-gold-400 text-lg flex-shrink-0"></i>
-    <p class="font-body text-sm text-left" style="color:rgba(213,207,199,.5);">
-      Toate rezerv&#x103;rile se fac prin <strong class="text-gold-400">chat live</strong>. D&#x103; click pe orice buton pentru a discuta direct cu echipa noastr&#x103; &#8212; r&#x103;spundem &icirc;n c&acirc;teva minute.
-    </p>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ════════ MEMBERSHIP ════════ -->
-
-<section id="membership" class="py-28 px-6">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div class="rl">
-        <span class="sl">Fan Club</span>
-        <h2 class="font-display text-4xl md:text-6xl font-black text-white mt-5 mb-5 leading-tight">
-          Fii Parte din<br/><span class="ggt">Cercul Interior</span>
-        </h2>
-        <p class="font-body text-sm md:text-base leading-relaxed mb-10" style="color:rgba(213,207,199,.38);">
-          Alatur&#x103;-te comunit&#x103;&#x21B;ii de fani devota&#x21B;i care au acces exclusiv la g&acirc;ndurile nefilate ale lui Daniel, con&#x21B;inut timpuriu &#x219;i invita&#x21B;ii prioritare la fiecare eveniment.
-        </p>
-        <ul class="space-y-5 mb-10">
-          <li class="flex items-start gap-4"><div class="ic mt-0.5"><i class="fas fa-film"></i></div><div><div class="font-display text-white font-bold mb-0.5">Con&#x21B;inut Exclusiv</div><div class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.38);">Behind-the-scenes, scrisori personale &#x219;i g&acirc;nduri needitateb&acirc;mp&#x103;rt&#x103;&#x219;ite doar cu membrii.</div></div></li>
-          <li class="flex items-start gap-4"><div class="ic mt-0.5"><i class="fas fa-bolt"></i></div><div><div class="font-display text-white font-bold mb-0.5">Rezervare Prioritar&#x103;</div><div class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.38);">Membrii primesc acces cu 24 de ore &icirc;nainte la v&acirc;nzarea biletelor pentru toate evenimentele.</div></div></li>
-          <li class="flex items-start gap-4"><div class="ic mt-0.5"><i class="fas fa-users"></i></div><div><div class="font-display text-white font-bold mb-0.5">Comunitate Privat&#x103;</div><div class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.38);">Acces la seminarul online s&#x103;pt&#x103;m&acirc;nal &#x219;i la grupul privat unde Daniel particip&#x103; direct.</div></div></li>
-          <li class="flex items-start gap-4"><div class="ic mt-0.5"><i class="fas fa-id-card"></i></div><div><div class="font-display text-white font-bold mb-0.5">Card Digital de Fan</div><div class="font-body text-sm leading-relaxed" style="color:rgba(213,207,199,.38);">Card de membru digital numerotat unic &#8212; un obiect de colec&#x21B;ie cu numele t&#x103;u.</div></div></li>
-        </ul>
-      </div>
-      <div class="rr flex flex-col items-center gap-6">
-        <!-- Fan card -->
-        <div class="w-full max-w-sm">
-          <div class="fc">
-            <div class="flex items-center justify-between mb-8">
-              <div class="flex items-center gap-2"><i class="fas fa-cross text-gold-400" style="font-size:.7rem;"></i><span class="font-display text-base font-black ggt tracking-wider">Daniel Bala&#537;</span></div>
-              <div class="fchip"><span></span><span></span><span></span><span></span></div>
-            </div>
-            <div class="mb-6">
-              <div class="font-body text-xs uppercase tracking-widest mb-1" style="color:rgba(212,160,23,.4);">Tip Abonament</div>
-              <div class="font-display text-2xl text-white font-bold">Cercul Interior</div>
-            </div>
-            <div class="flex items-end justify-between">
-              <div><div class="font-body text-xs uppercase tracking-widest mb-1" style="color:rgba(213,207,199,.22);">Membru Din</div><div class="font-body text-sm text-gold-400">2025</div></div>
-              <div class="text-right"><div class="font-body text-xs uppercase tracking-widest mb-1" style="color:rgba(213,207,199,.22);">Card Nr.</div><div class="font-body text-sm text-gold-400">#00001</div></div>
-            </div>
-          </div>
-        </div>
-        <!-- Pricing tiers -->
-        <div class="w-full max-w-sm space-y-3">
-          <div class="card rounded-none p-5 flex items-center justify-between">
-            <div><div class="font-display text-white font-bold text-sm">Lunar</div><div class="font-body text-xs mt-0.5" style="color:rgba(213,207,199,.28);">Se poate anula oric&acirc;nd</div></div>
-            <div class="flex items-center gap-3">
-              <div class="font-display text-xl font-black ggt">&euro;9<span class="font-body text-xs" style="color:rgba(213,207,199,.28);">/lun&#x103;</span></div>
-              <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; m&#x103; abonez Lunar la Fan Club (&euro;9/lun&#x103;).')" class="bg-btn" style="font-size:.65rem;padding:.5rem .85rem;">Aboneaz&#x103;</button>
-            </div>
-          </div>
-          <div class="pf rounded-none p-5 flex items-center justify-between">
-            <div>
-              <div class="flex items-center gap-2"><div class="font-display text-white font-bold text-sm">Anual</div><span class="font-body border border-green-400/30 text-green-400 px-1.5 py-0.5" style="font-size:.58rem;letter-spacing:.15em;">ECONO 30%</span></div>
-              <div class="font-body text-xs mt-0.5" style="color:rgba(213,207,199,.28);">Cea mai bun&#x103; ofert&#x103;</div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="font-display text-xl font-black ggt">&euro;75<span class="font-body text-xs" style="color:rgba(213,207,199,.28);">/an</span></div>
-              <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; m&#x103; abonez Anual la Fan Club (&euro;75/an).')" class="bp" style="font-size:.65rem;padding:.5rem .85rem;"><i class="fas fa-star text-xs"></i><span>Aboneaz&#x103;</span></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ BOOKING / CONTACT ════════ -->
-
-<section id="booking" class="py-28 px-6" style="background:rgba(13,12,9,.8);">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="rv"><span class="sl">Contacteaz&#x103;-Ne</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Rezerv&#x103; o Apari&#x21B;ie</h2>
-      <p class="rv d2 font-body text-sm leading-relaxed mt-4 max-w-lg mx-auto" style="color:rgba(213,207,199,.38);">
-        Apari&#x21B;ii la evenimente, colabor&#x103;ri media, keynote &#8212; scrie-ne prin chat &#x219;i te contact&#x103;m.
+      <span class="uppercase text-gold tracking-widest text-sm">Published 2023</span>
+      <h2 class="font-display text-5xl font-bold mt-4 mb-6">“The Truth Behind the Cassock”</h2>
+      <p class="text-light/70 text-lg leading-relaxed mb-8">
+        A bold and honest book revealing personal stories, church realities, and a powerful message of authenticity and inner freedom.
       </p>
-      <div class="sr"></div>
-    </div>
-    <div class="max-w-2xl mx-auto rv">
-      <form id="bform" novalidate class="space-y-6">
-        <div class="grid md:grid-cols-2 gap-5">
-          <div>
-            <label class="fl" for="fn"><i class="fas fa-user mr-1.5 text-gold-600/40"></i>Nume Complet <span style="color:#d4a017;">*</span></label>
-            <input type="text" id="fn" name="name" placeholder="Numele t&#x103;u" class="ff"/>
-            <p class="emsg hidden font-body text-xs mt-1.5 flex items-center gap-1" style="color:#f87171;"><i class="fas fa-circle-exclamation text-xs"></i>Te rug&#x103;m introduce&#x21B;i numele.</p>
-          </div>
-          <div>
-            <label class="fl" for="fe"><i class="fas fa-envelope mr-1.5 text-gold-600/40"></i>Email <span style="color:#d4a017;">*</span></label>
-            <input type="email" id="fe" name="email" placeholder="email@tau.ro" class="ff"/>
-            <p class="emsg hidden font-body text-xs mt-1.5 flex items-center gap-1" style="color:#f87171;"><i class="fas fa-circle-exclamation text-xs"></i>Email invalid.</p>
-          </div>
-        </div>
-        <div>
-          <label class="fl" for="ft"><i class="fas fa-list-check mr-1.5 text-gold-600/40"></i>Tip Rezervare <span style="color:#d4a017;">*</span></label>
-          <select id="ft" name="type" class="ff appearance-none cursor-pointer">
-            <option value="">&#8212; Alege tipul rezerv&#x103;rii &#8212;</option>
-            <option>Apari&#x21B;ie la eveniment</option>
-            <option>Colaborare media</option>
-            <option>Keynote / Vorbit public</option>
-            <option>Interviu / Podcast</option>
-            <option>Meet &amp; Greet</option>
-            <option>Seminar online</option>
-            <option>Altul</option>
-          </select>
-          <p class="emsg hidden font-body text-xs mt-1.5 flex items-center gap-1" style="color:#f87171;"><i class="fas fa-circle-exclamation text-xs"></i>Alege tipul rezerv&#x103;rii.</p>
-        </div>
-        <div>
-          <label class="fl"><i class="fas fa-phone mr-1.5 text-gold-600/40"></i>Telefon <span style="color:rgba(213,207,199,.25);">(Op&#x21B;ional)</span></label>
-          <input type="tel" name="phone" placeholder="+40 700 000 000" class="ff"/>
-        </div>
-        <div>
-          <label class="fl" for="fm"><i class="fas fa-message mr-1.5 text-gold-600/40"></i>Mesaj <span style="color:#d4a017;">*</span></label>
-          <textarea id="fm" name="message" rows="5" placeholder="Spune-ne despre eveniment, viziunea ta &#x219;i orice detaliu important..." class="ff resize-none"></textarea>
-          <p class="emsg hidden font-body text-xs mt-1.5 flex items-center gap-1" style="color:#f87171;"><i class="fas fa-circle-exclamation text-xs"></i>Te rug&#x103;m adaug&#x103; un mesaj.</p>
-        </div>
-        <button type="submit" id="sbtn" class="bp w-full justify-center">
-          <i class="fas fa-paper-plane" id="sico"></i>
-          <span id="stxt">Trimite Cererea de Rezervare</span>
-        </button>
-        <div id="fsuccess" class="hidden text-center py-6" style="border:1px solid rgba(212,160,23,.22);background:rgba(212,160,23,.04);">
-          <div class="w-14 h-14 border flex items-center justify-center mx-auto mb-4" style="border-color:rgba(212,160,23,.4);"><i class="fas fa-check text-gold-400 text-xl"></i></div>
-          <p class="font-display text-white text-xl mb-1">Cerere Trimis&#x103;</p>
-          <p class="font-body text-sm" style="color:rgba(213,207,199,.38);">V&#x103; r&#x103;spundem &icirc;n maxim 48 de ore. &Icirc;ntre timp, pute&#x21B;i &#x219;i discuta cu noi pe chat.</p>
-        </div>
-      </form>
+      <button onclick="openChat('Hello! I want to buy the book The Truth Behind the Cassock.')" 
+              class="inline-flex items-center gap-3 btn-gold px-8 py-4 text-lg">
+        <i class="fas fa-book-open"></i> Buy Book — €55
+      </button>
     </div>
   </div>
 </section>
 
-<!-- ════════ DONATION ════════ -->
-
-<section id="donation" class="py-28 px-6">
-  <div class="max-w-4xl mx-auto text-center">
-    <div class="rv"><span class="sl">Sprijin</span></div>
-    <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4 mb-5">Sprijin&#x103; Vocea</h2>
-    <p class="rv d2 font-accent text-xl md:text-2xl leading-relaxed mb-4 max-w-2xl mx-auto" style="color:rgba(213,207,199,.58);font-style:italic;">
-      &#8220;Fiecare poveste are nevoie de cineva care crede &icirc;n ea. Sprijinul t&#x103;u men&#x21B;ine aceast&#x103; conversa&#x21B;ie vie.&#8221;
-    </p>
-    <p class="rv d3 font-body text-sm mb-14 max-w-xl mx-auto leading-relaxed" style="color:rgba(213,207,199,.32);">
-      Contribu&#x21B;ia ta &icirc;l ajut&#x103; pe Daniel s&#x103; continue s&#x103; creeze con&#x21B;inut onest &#x219;i valoros, liber de presiuni corporative &#x219;i agende publicitare.
-    </p>
-    <div class="rv d4 mb-12 max-w-lg mx-auto">
-      <div class="flex justify-between mb-2">
-        <span class="font-body text-xs uppercase tracking-widest flex items-center gap-1.5" style="color:rgba(213,207,199,.28);"><i class="fas fa-chart-line text-gold-600 text-xs"></i>Obiectiv Lunar</span>
-        <span class="font-body text-xs text-gold-400">&euro;3,240 din &euro;5,000</span>
-      </div>
-      <div class="w-full rounded-full overflow-hidden" style="height:6px;background:rgba(255,255,255,.06);">
-        <div class="pbfill" id="pbar" style="width:0%;"></div>
-      </div>
-      <div class="flex items-center justify-between mt-2">
-        <span class="font-body text-xs" style="color:rgba(213,207,199,.22);"><i class="fas fa-users mr-1"></i>127 sus&#x21B;in&#x103;tori</span>
-        <span class="font-body text-xs" style="color:rgba(213,207,199,.22);">64.8%</span>
-      </div>
-    </div>
-    <div class="rv d5 flex flex-wrap justify-center gap-3">
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; donez &euro;5 pentru Daniel Bala&#537;.')"     class="bg-btn" style="font-size:.7rem;">&euro;5</button>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; donez &euro;10 pentru Daniel Bala&#537;.')"    class="bg-btn" style="font-size:.7rem;">&euro;10</button>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; donez &euro;25 pentru Daniel Bala&#537;.')"    class="bp"     style="font-size:.7rem;"><i class="fas fa-star text-xs"></i><span>&euro;25</span></button>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; donez &euro;50 pentru Daniel Bala&#537;.')"    class="bg-btn" style="font-size:.7rem;">&euro;50</button>
-      <button onclick="openChat('Bun&#x103; ziua! Vreau s&#x103; donez o sum&#x103; personalizat&#x103;.')"       class="bg-btn" style="font-size:.7rem;"><i class="fas fa-pen-to-square text-xs"></i><span>Sum&#x103; Personalizat&#x103;</span></button>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ TESTIMONIALS ════════ -->
-
-<section id="testimonials" class="py-28 px-6" style="background:rgba(12,11,8,.75);">
-  <div class="max-w-7xl mx-auto">
+<!-- MEET & GREET -->
+<section id="meet" class="py-28 bg-[#0f0f0f]">
+  <div class="max-w-5xl mx-auto px-6">
     <div class="text-center mb-16">
-      <div class="rv"><span class="sl">Voci de Fani</span></div>
-      <h2 class="rv d1 font-display text-4xl md:text-6xl font-black text-white mt-4">Ce Spun Fanii</h2>
-      <div class="sr"></div>
+      <h2 class="font-display text-5xl font-bold">Meet & Greet</h2>
+      <p class="text-light/60 mt-3">Exclusive experiences with Daniel Balaș</p>
     </div>
-    <div class="rv relative overflow-hidden">
-      <div class="tt" id="ttrack">
-        <div class="tslide flex-shrink-0 px-3"><div class="card rounded-none p-6 h-full"><div class="qi"><i class="fas fa-quote-left"></i></div><div class="flex gap-0.5 mb-4"><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i></div><p class="font-accent text-base leading-relaxed mb-6" style="color:rgba(213,207,199,.6);font-style:italic;">&#8220;Povestea lui Daniel m-a schimbat. Curajul de a p&#x103;r&#x103;si o via&#x21B;&#x103; comod&#x103; pentru adev&#x103;r e ceva rar &icirc;n Rom&acirc;nia de azi.&#8221;</p><div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(212,160,23,.12);"><div class="w-10 h-10 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><span class="font-display font-bold text-gold-400 text-xs">AM</span></div><div><div class="font-body text-sm text-white font-semibold leading-none">Alexandru M.</div><div class="font-body text-xs mt-0.5 flex items-center gap-1" style="color:rgba(213,207,199,.28);"><i class="fas fa-location-dot text-xs" style="color:rgba(212,160,23,.35);"></i>Cluj-Napoca</div></div></div></div></div>
 
-```
-    <div class="tslide flex-shrink-0 px-3"><div class="card rounded-none p-6 h-full"><div class="qi"><i class="fas fa-quote-left"></i></div><div class="flex gap-0.5 mb-4"><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i></div><p class="font-accent text-base leading-relaxed mb-6" style="color:rgba(213,207,199,.6);font-style:italic;">&#8220;Cartea &#8222;Adev&#x103;rul din spatele sutanei&#8221; mi-a deschis ochii. Daniel vorbe&#x219;te din suflet &#x219;i &icirc;n&#x21B;elegi c&#x103; nu e niciun act &#8212; e pur &#x219;i simplu el.&#8221;</p><div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(212,160,23,.12);"><div class="w-10 h-10 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><span class="font-display font-bold text-gold-400 text-xs">IP</span></div><div><div class="font-body text-sm text-white font-semibold leading-none">Ioana P.</div><div class="font-body text-xs mt-0.5 flex items-center gap-1" style="color:rgba(213,207,199,.28);"><i class="fas fa-location-dot text-xs" style="color:rgba(212,160,23,.35);"></i>Bucure&#x219;ti</div></div></div></div></div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card p-8">
+        <h3 class="text-2xl font-bold mb-1">Standard</h3>
+        <div class="text-6xl font-display font-black ggt mb-8">€350</div>
+        <ul class="space-y-4 mb-10 text-light/80">
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Photo with Daniel</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> 10-minute conversation</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Signed book</li>
+        </ul>
+        <button onclick="openChat('Hello! I would like to book the Standard Meet & Greet for €350.')" 
+                class="w-full py-4 btn-outline text-sm font-medium">Book Standard</button>
+      </div>
 
-    <div class="tslide flex-shrink-0 px-3"><div class="card rounded-none p-6 h-full"><div class="qi"><i class="fas fa-quote-left"></i></div><div class="flex gap-0.5 mb-4"><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i></div><p class="font-accent text-base leading-relaxed mb-6" style="color:rgba(213,207,199,.6);font-style:italic;">&#8220;Con&#x21B;inutul lui m-a ajutat prin una din cele mai grele perioade ale vie&#x21B;ii mele. Daniel vorbe&#x219;te cu o &icirc;n&#x21B;elepciune care pare deopotriv&#x103; str&#x103;veche &#x219;i complet modern&#x103;.&#8221;</p><div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(212,160,23,.12);"><div class="w-10 h-10 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><span class="font-display font-bold text-gold-400 text-xs">MS</span></div><div><div class="font-body text-sm text-white font-semibold leading-none">Mihai S.</div><div class="font-body text-xs mt-0.5 flex items-center gap-1" style="color:rgba(213,207,199,.28);"><i class="fas fa-location-dot text-xs" style="color:rgba(212,160,23,.35);"></i>Timi&#x219;oara</div></div></div></div></div>
+      <div class="card p-8 relative ring-2 ring-gold/70">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black text-xs font-bold px-6 py-1 rounded">RECOMMENDED</div>
+        <h3 class="text-2xl font-bold mb-1">VIP Experience</h3>
+        <div class="text-6xl font-display font-black ggt mb-8">€750</div>
+        <ul class="space-y-4 mb-10 text-light/80">
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Everything in Standard</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> 30-minute private talk</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Personal video message</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Signed merchandise</li>
+        </ul>
+        <button onclick="openChat('Hello! I would like to book the VIP Meet & Greet for €750.')" 
+                class="w-full py-4 btn-gold text-sm font-medium">Book VIP</button>
+      </div>
 
-    <div class="tslide flex-shrink-0 px-3"><div class="card rounded-none p-6 h-full"><div class="qi"><i class="fas fa-quote-left"></i></div><div class="flex gap-0.5 mb-4"><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i></div><p class="font-accent text-base leading-relaxed mb-6" style="color:rgba(213,207,199,.6);font-style:italic;">&#8220;Seminarul online a meritat fiecare ban. Daniel e &#x219;i mai autentic &icirc;n direct. 20 de minute de conversa&#x21B;ie care mi-au schimbat perspectiva.&#8221;</p><div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(212,160,23,.12);"><div class="w-10 h-10 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><span class="font-display font-bold text-gold-400 text-xs">RL</span></div><div><div class="font-body text-sm text-white font-semibold leading-none">Raluca L.</div><div class="font-body text-xs mt-0.5 flex items-center gap-1" style="color:rgba(213,207,199,.28);"><i class="fas fa-location-dot text-xs" style="color:rgba(212,160,23,.35);"></i>Ia&#x219;i</div></div></div></div></div>
-
-    <div class="tslide flex-shrink-0 px-3"><div class="card rounded-none p-6 h-full"><div class="qi"><i class="fas fa-quote-left"></i></div><div class="flex gap-0.5 mb-4"><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i></div><p class="font-accent text-base leading-relaxed mb-6" style="color:rgba(213,207,199,.6);font-style:italic;">&#8220;Sunt membru Fan Club de 8 luni. Con&#x21B;inutul exclusiv singur merit&#x103; banii. Daniel pune suflet &icirc;n tot ce &icirc;mpart&#x103;&#x219;e&#x219;te cu membrii.&#8221;</p><div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(212,160,23,.12);"><div class="w-10 h-10 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><span class="font-display font-bold text-gold-400 text-xs">CT</span></div><div><div class="font-body text-sm text-white font-semibold leading-none">Cristian T.</div><div class="font-body text-xs mt-0.5 flex items-center gap-1" style="color:rgba(213,207,199,.28);"><i class="fas fa-location-dot text-xs" style="color:rgba(212,160,23,.35);"></i>Bra&#x219;ov</div></div></div></div></div>
-
-    <div class="tslide flex-shrink-0 px-3"><div class="card rounded-none p-6 h-full"><div class="qi"><i class="fas fa-quote-left"></i></div><div class="flex gap-0.5 mb-4"><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i><i class="fas fa-star text-gold-400 text-xs"></i></div><p class="font-accent text-base leading-relaxed mb-6" style="color:rgba(213,207,199,.6);font-style:italic;">&#8220;Urm&#x103;resc sute de creatori dar Daniel e diferit. Nu se preface &#8212; exist&#x103; pur &#x219;i simplu, iar autenticitatea asta e rar&#x103; &#x219;i magnetic&#x103;.&#8221;</p><div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(212,160,23,.12);"><div class="w-10 h-10 border flex items-center justify-center" style="border-color:rgba(212,160,23,.25);"><span class="font-display font-bold text-gold-400 text-xs">EA</span></div><div><div class="font-body text-sm text-white font-semibold leading-none">Elena A.</div><div class="font-body text-xs mt-0.5 flex items-center gap-1" style="color:rgba(213,207,199,.28);"><i class="fas fa-location-dot text-xs" style="color:rgba(212,160,23,.35);"></i>Constan&#x21B;a</div></div></div></div></div>
-  </div>
-
-  <div class="flex items-center justify-center gap-4 mt-8">
-    <button id="tprev" aria-label="Anterior" class="w-10 h-10 border flex items-center justify-center text-gold-600 hover:text-gold-300 transition-all" style="border-color:rgba(212,160,23,.22);"><i class="fas fa-chevron-left text-xs"></i></button>
-    <div id="tdots" class="flex gap-1.5"></div>
-    <button id="tnext" aria-label="Urm&#x103;tor" class="w-10 h-10 border flex items-center justify-center text-gold-600 hover:text-gold-300 transition-all" style="border-color:rgba(212,160,23,.22);"><i class="fas fa-chevron-right text-xs"></i></button>
-  </div>
-</div>
-```
-
+      <div class="card p-8">
+        <h3 class="text-2xl font-bold mb-1">Online Session</h3>
+        <div class="text-6xl font-display font-black ggt mb-8">€150</div>
+        <ul class="space-y-4 mb-10 text-light/80">
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> 20-minute 1-on-1 video call</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Ask anything you want</li>
+          <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Recording sent after</li>
+        </ul>
+        <button onclick="openChat('Hello! I would like to book an Online Session for €150.')" 
+                class="w-full py-4 btn-outline text-sm font-medium">Book Online</button>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ════════ FOOTER ════════ -->
+<!-- EVENTS -->
+<section id="events" class="py-28 bg-black">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="font-display text-5xl font-bold mb-6">Upcoming Events</h2>
+    <p class="text-light/60 mb-12">Live seminars and Q&amp;A sessions with Daniel</p>
+    
+    <div class="card p-10 max-w-xl mx-auto">
+      <div class="text-gold text-sm uppercase tracking-widest mb-2">Weekly • Online</div>
+      <div class="text-3xl font-semibold mb-4">Live Q&amp;A Sessions</div>
+      <p class="text-light/70 mb-8">Join Daniel for unfiltered conversations, questions, and spiritual insights every week.</p>
+      <button onclick="openChat('Hello! I want to join the next Live Q&amp;A session.')" 
+              class="btn-gold px-10 py-4">Join Live Session</button>
+    </div>
+  </div>
+</section>
 
-<footer style="background:#080808;border-top:1px solid rgba(212,160,23,.1);">
-  <div class="max-w-7xl mx-auto px-6 py-16">
-    <div class="grid md:grid-cols-4 gap-10 mb-14">
-      <div class="md:col-span-2">
-        <div class="flex items-center gap-2.5 mb-4">
-          <span class="w-7 h-7 border flex items-center justify-center" style="border-color:rgba(212,160,23,.3);"><i class="fas fa-cross text-gold-400" style="font-size:.7rem;"></i></span>
-          <span class="font-display text-xl font-black ggt tracking-wider">Daniel Bala&#537;</span>
-        </div>
-        <p class="font-body text-sm leading-relaxed mb-6 max-w-xs" style="color:rgba(213,207,199,.28);">
-          &#8222;Un suflet c&#x103;l&#x103;tor&#8221; &#8212; fostul preot din Constan&#x21B;a care a ales adev&#x103;rul &icirc;n locul sutanei &#x219;i a c&#x219;tigat inimile milioanelor.
-        </p>
-        <div class="flex gap-3">
-          <a href="https://www.tiktok.com/@danielbls1"          target="_blank" class="fsoc" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-          <a href="https://www.youtube.com/@danielbalas"        target="_blank" class="fsoc" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.facebook.com/mihaidaniel.balas"  target="_blank" class="fsoc" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/danielbalas15/"    target="_blank" class="fsoc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
-      <div>
-        <h3 class="font-body text-xs uppercase tracking-widest mb-4" style="color:rgba(213,207,199,.22);">Naviga&#x21B;ie</h3>
-        <ul class="space-y-2.5">
-          <li><a href="#about"      class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Povestea</a></li>
-          <li><a href="#carte"      class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Cartea</a></li>
-          <li><a href="#media"      class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Media</a></li>
-          <li><a href="#events"     class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Evenimente</a></li>
-          <li><a href="#meetgreet"  class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Meet &amp; Greet</a></li>
-          <li><a href="#membership" class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Fan Club</a></li>
-          <li><a href="#donation"   class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">Dona&#x21B;ii</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="font-body text-xs uppercase tracking-widest mb-4" style="color:rgba(213,207,199,.22);">Contact</h3>
-        <ul class="space-y-3">
-          <li class="flex items-center gap-2.5"><i class="fas fa-envelope w-3.5" style="color:rgba(212,160,23,.4);font-size:.75rem;"></i><span class="font-body text-sm" style="color:rgba(213,207,199,.38);">fan@danielbalas.ro</span></li>
-          <li class="flex items-center gap-2.5"><i class="fas fa-location-dot w-3.5" style="color:rgba(212,160,23,.4);font-size:.75rem;"></i><span class="font-body text-sm" style="color:rgba(213,207,199,.38);">Constan&#x21B;a, Rom&acirc;nia</span></li>
-          <li class="flex items-center gap-2.5"><i class="fas fa-headset w-3.5" style="color:rgba(212,160,23,.4);font-size:.75rem;"></i>
-            <button onclick="openChat('Bun&#x103; ziua! Am o &icirc;ntrebare.')" class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);background:none;border:none;cursor:pointer;padding:0;">Chat Live</button>
-          </li>
-          <li class="flex items-center gap-2.5"><i class="fas fa-globe w-3.5" style="color:rgba(212,160,23,.4);font-size:.75rem;"></i><a href="https://www.danielbalas.com" target="_blank" class="font-body text-sm hover:text-gold-300 transition-colors" style="color:rgba(213,207,199,.38);">danielbalas.com</a></li>
-        </ul>
-      </div>
+<!-- FOOTER -->
+<footer class="bg-black border-t border-gold/10 py-20">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <div class="flex items-center justify-center gap-3 mb-8">
+      <span class="w-8 h-8 border border-gold/50 flex items-center justify-center rounded">
+        <i class="fas fa-cross text-gold text-sm"></i>
+      </span>
+      <span class="font-display text-3xl font-bold ggt tracking-wider">Daniel Balaș</span>
+    </div>
+    
+    <p class="max-w-md mx-auto text-light/50 mb-10">
+      This is an unofficial fan-created website dedicated to Daniel Balaș. 
+      For official content, please visit his verified social channels.
+    </p>
+
+    <div class="flex justify-center gap-8 text-3xl mb-12 text-light/40">
+      <a href="https://www.tiktok.com/@daniel.balas15" target="_blank" class="hover:text-gold transition"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.youtube.com/@danielbalas" target="_blank" class="hover:text-gold transition"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/danielbalas15/" target="_blank" class="hover:text-gold transition"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/mihaidaniel.balas" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook-f"></i></a>
     </div>
 
-```
-<!-- Disclaimer -->
-<div class="disc mb-8">
-  <div class="flex items-start gap-3">
-    <i class="fas fa-triangle-exclamation mt-0.5 flex-shrink-0" style="color:rgba(212,160,23,.6);font-size:.85rem;"></i>
-    <p class="font-body text-xs leading-relaxed" style="color:rgba(213,207,199,.32);">
-      <strong style="color:#d4a017;font-weight:600;">DISCLAIMER FAN WEBSITE:</strong>
-      Acesta este un website neoficial, creat de fani, dedicat lui Daniel Bala&#537;. Nu este afiliat cu, aprobat de sau conectat oficial la Daniel Bala&#537; sau reprezentan&#x21B;ii s&#x103;i. Pentru informa&#x21B;ii oficiale, consulta&#x21B;i canalele verificate de social media ale lui Daniel Bala&#537; &#x219;i site-ul s&#x103;u oficial <a href="https://www.danielbalas.com" target="_blank" class="text-gold-600 hover:text-gold-400">danielbalas.com</a>.
-    </p>
-  </div>
-</div>
-
-<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6" style="border-top:1px solid rgba(212,160,23,.08);">
-  <p class="font-body text-xs" style="color:rgba(213,207,199,.18);">&copy; 2025 danielbalas.fan &mdash; Website Neoficial de Fan. F&#x103;cut cu <i class="fas fa-heart mx-1" style="color:rgba(212,160,23,.4);"></i> de fani, pentru fani.</p>
-  <div class="flex gap-5">
-    <a href="#" class="font-body text-xs" style="color:rgba(213,207,199,.2);">Confiden&#x21B;ialitate</a>
-    <a href="#" class="font-body text-xs" style="color:rgba(213,207,199,.2);">Termeni</a>
-    <a href="#" class="font-body text-xs" style="color:rgba(213,207,199,.2);">Disclaimer</a>
-  </div>
-</div>
-```
-
+    <p class="text-xs text-light/30">© 2026 Daniel Balaș Fan Website • Made with respect by fans</p>
   </div>
 </footer>
 
-<!-- ════════ JS ════════ -->
-
 <script>
-/* Cursor glow */
-const cg = document.getElementById('cglow');
-document.addEventListener('mousemove', e => { cg.style.left = e.clientX+'px'; cg.style.top = e.clientY+'px'; });
-
-/* Nav */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 70), {passive:true});
-
-/* Mobile menu */
-const mbtn = document.getElementById('menu-btn'), mico = document.getElementById('menu-ico'), mmenu = document.getElementById('mob-menu');
-mbtn.addEventListener('click', () => {
-  const o = !mmenu.classList.contains('hidden');
-  mmenu.classList.toggle('hidden', o);
-  mico.className = o ? 'fas fa-bars text-sm' : 'fas fa-xmark text-sm';
-});
-document.querySelectorAll('.mnl').forEach(l => l.addEventListener('click', () => { mmenu.classList.add('hidden'); mico.className = 'fas fa-bars text-sm'; }));
-
-/* Reveal */
-const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), {threshold:.1});
-document.querySelectorAll('.rv,.rl,.rr').forEach(el => obs.observe(el));
-
-/* Progress bar */
-const pb = document.getElementById('pbar');
-if(pb){ const po = new IntersectionObserver(es => { if(es[0].isIntersecting){ setTimeout(()=>pb.style.width='64.8%',400); po.disconnect(); }},{threshold:.6}); po.observe(pb); }
-
-/* Testimonials carousel */
-const tr = document.getElementById('ttrack'), slides = [...document.querySelectorAll('.tslide')], dotsEl = document.getElementById('tdots');
-let cur=0, perV=3, maxI=0, timer;
-const gpv = () => window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-const bdots = () => {
-  if(!dotsEl) return; dotsEl.innerHTML='';
-  for(let i=0;i<=maxI;i++){
-    const d=document.createElement('button'); d.setAttribute('aria-label','Slide '+(i+1));
-    d.style.cssText=`width:${i===cur?'20px':'8px'};height:8px;border-radius:4px;background:${i===cur?'#d4a017':'rgba(255,255,255,.15)'};border:none;cursor:pointer;transition:all .3s;`;
-    d.addEventListener('click',()=>goTo(i)); dotsEl.appendChild(d);
-  }
-};
-const udots = () => { if(!dotsEl)return; [...dotsEl.children].forEach((d,i)=>{ d.style.width=i===cur?'20px':'8px'; d.style.background=i===cur?'#d4a017':'rgba(255,255,255,.15)'; }); };
-const goTo = idx => { cur=Math.max(0,Math.min(idx,maxI)); tr.style.transform=`translateX(-${(100/perV)*cur}%)`; udots(); clearInterval(timer); timer=setInterval(()=>goTo(cur<maxI?cur+1:0),5000); };
-const initC = () => { perV=gpv(); maxI=Math.max(0,slides.length-perV); slides.forEach(s=>s.style.width=`${100/perV}%`); cur=Math.min(cur,maxI); goTo(cur); bdots(); };
-document.getElementById('tprev')?.addEventListener('click',()=>goTo(cur-1));
-document.getElementById('tnext')?.addEventListener('click',()=>goTo(cur+1));
-window.addEventListener('resize', initC, {passive:true});
-initC();
-
-/* Booking form */
-const bf = document.getElementById('bform');
-bf?.addEventListener('submit', e => {
-  e.preventDefault();
-  const nm=document.getElementById('fn'), em=document.getElementById('fe'), ty=document.getElementById('ft'), ms=document.getElementById('fm');
-  bf.querySelectorAll('.emsg').forEach(m=>m.classList.add('hidden'));
-  bf.querySelectorAll('.ff').forEach(f=>f.style.borderColor='');
-  let ok=true;
-  const err = f => { f.style.borderColor='rgba(248,113,113,.5)'; f.nextElementSibling?.classList?.remove('hidden'); ok=false; };
-  if(!nm.value.trim()) err(nm);
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) err(em);
-  if(!ty.value) err(ty);
-  if(ms.value.trim().length < 10) err(ms);
-  if(!ok) return;
-
-  const btn=document.getElementById('sbtn'), ico=document.getElementById('sico'), txt=document.getElementById('stxt');
-  btn.disabled=true; btn.style.opacity='.65'; ico.className='fas fa-spinner fa-spin'; txt.textContent='Se trimite\u2026';
-
-  // After submission, also open chat with their message
-  setTimeout(() => {
-    bf.querySelectorAll('input,select,textarea,button').forEach(el=>el.classList.add('hidden'));
-    document.getElementById('fsuccess').classList.remove('hidden');
-    // Pre-fill chat with their request
-    openChat(`Bun\u0103 ziua! M\u0103 numesc ${nm.value} (${em.value}). Doresc: ${ty.value}. Detalii: ${ms.value.substring(0,80)}\u2026`);
-  }, 1500);
-});
-
-/* ────────────────────────────────────────────
-   SMARTSUPP CHAT INTEGRATION
-   Opens Smartsupp widget and pre-fills message
-───────────────────────────────────────────── */
-function openChat(prefilledMsg) {
-  // Trigger Smartsupp to open
+function openChat(message) {
   if (typeof smartsupp === 'function') {
     smartsupp('chat:open');
-    if (prefilledMsg) {
-      // Pre-set the visitor's name/message context via Smartsupp API
-      smartsupp('chat:message', prefilledMsg);
+    if (message) {
+      // Pre-fill the message in the chat
+      smartsupp('chat:message', message);
     }
   } else {
-    // Fallback: Smartsupp not yet loaded — scroll to chat widget or show notice
-    console.log('Smartsupp not loaded yet, message:', prefilledMsg);
-    // Try to click the Smartsupp widget button directly
-    const ssBtn = document.querySelector('#smartsupp-widget-container button, [data-smartsupp-widget], #chat-widget-container button');
-    if(ssBtn) ssBtn.click();
+    // Fallback if Smartsupp hasn't loaded yet
+    alert("Chat is opening...\n\nMessage: " + (message || "Hello! I'm interested in Daniel Balaș."));
   }
 }
-
-/* ESC closes modals (none in this version but kept for future) */
-document.addEventListener('keydown', e => { if(e.key === 'Escape') {} });
 </script>
 
 </body>
