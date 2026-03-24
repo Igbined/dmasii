@@ -9,19 +9,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <!-- Smartsupp Live Chat -->
-  <!-- Smartsupp Live Chat script -->
-<script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = '6748f4bf4ee1856e37c46ef3e1bac04a71202e10';
-window.smartsupp||(function(d) {
-  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-  c.type='text/javascript';c.charset='utf-8';c.async=true;
-  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
-</script>
-<noscript>Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
->
+  <script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = 'YOUR_REAL_SMARTSUPP_KEY_HERE';   // ← Replace with your actual Smartsupp key
+    window.smartsupp||(function(d) {
+      var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+      s=d.createElement('script');s.type='text/javascript';s.charset='utf-8';s.async=true;
+      s.src='https://www.smartsuppchat.com/loader.js?';c=d.getElementsByTagName('script')[0];
+      c.parentNode.insertBefore(s,c);
+    })(document);
+  </script>
 
   <script>
     tailwind.config = {
@@ -54,11 +51,9 @@ window.smartsupp||(function(d) {
 </head>
 <body class="overflow-x-hidden">
 
-<!-- All content is now dynamic via JavaScript below -->
-
 <script>
-// === LANGUAGE & TRANSLATION SYSTEM ===
-let isRomanian = false;
+// === IP-BASED LANGUAGE DETECTION & TRANSLATION ===
+let currentLang = 'en'; // default: English (non-Romania)
 
 const translations = {
   en: {
@@ -74,8 +69,8 @@ const translations = {
     storyTitle: "His Journey",
     bookTitle: "“The Truth Behind the Cassock”",
     meetTitle: "Meet & Greet",
-    eventsTitle: "Upcoming Events"
-    // Add more keys if you expand the site
+    eventsTitle: "Upcoming Events",
+    bookNow: "Book Now"
   },
   ro: {
     title: "Daniel Balaș — Website Fan",
@@ -90,73 +85,68 @@ const translations = {
     storyTitle: "Drumul Său",
     bookTitle: "“Adevărul din spatele sutanei”",
     meetTitle: "Întâlnire cu Daniel",
-    eventsTitle: "Evenimente Viitoare"
+    eventsTitle: "Evenimente Viitoare",
+    bookNow: "Rezervă Acum"
   }
 };
 
-function setLanguage(lang) {
-  isRomanian = (lang === 'ro');
+function applyLanguage(lang) {
+  currentLang = lang;
   document.documentElement.lang = lang;
   document.title = translations[lang].title;
 
-  // Update visible texts (you can expand this for more elements)
+  // Update navigation
   const navLinks = document.querySelectorAll('.nav-link');
-  if (navLinks.length) {
-    navLinks[0].textContent = translations[lang].navStory;
-    navLinks[1].textContent = translations[lang].navBook;
-    navLinks[2].textContent = translations[lang].navEvents;
-    navLinks[3].textContent = translations[lang].navMeet;
-  }
+  navLinks[0].textContent = translations[lang].navStory;
+  navLinks[1].textContent = translations[lang].navBook;
+  navLinks[2].textContent = translations[lang].navEvents;
+  navLinks[3].textContent = translations[lang].navMeet;
 
-  // You can add more DOM updates here as needed
+  // You can add more selectors here for other texts (hero, headings, etc.)
 }
 
-// Detect country from IP and set language + Smartsupp
-async function detectCountryAndLanguage() {
+// Detect if visitor is from Romania
+async function detectCountry() {
   try {
-    const res = await fetch('https://ipapi.co/json/');
-    const data = await res.json();
+    const response = await fetch('https://ipapi.co/json/');
+    const data = await response.json();
     
     if (data.country_code === 'RO') {
-      setLanguage('ro');
-      
-      // Set Smartsupp to Romanian
-      if (typeof smartsupp === 'function') {
-        smartsupp('language', 'ro');
-      }
+      applyLanguage('ro');
+      if (typeof smartsupp === 'function') smartsupp('language', 'ro');
     } else {
-      setLanguage('en');
-      if (typeof smartsupp === 'function') {
-        smartsupp('language', 'en');
-      }
+      applyLanguage('en');
+      if (typeof smartsupp === 'function') smartsupp('language', 'en');
     }
-  } catch (e) {
-    // Fallback to English if detection fails
-    setLanguage('en');
-    if (typeof smartsupp === 'function') {
-      smartsupp('language', 'en');
-    }
+  } catch (err) {
+    // Fallback: show English if detection fails
+    applyLanguage('en');
+    if (typeof smartsupp === 'function') smartsupp('language', 'en');
   }
 }
 
-// Open Smartsupp with language-appropriate message
-function openChat(baseMessage) {
-  const message = isRomanian 
-    ? baseMessage.replace(/Hello!/g, 'Bună ziua!').replace(/I want/g, 'Vreau') 
-    : baseMessage;
+// Open Smartsupp with correct language message
+function openChat(englishMsg) {
+  let message = englishMsg;
+  
+  if (currentLang === 'ro') {
+    // Simple translation for common phrases (expand as needed)
+    message = englishMsg
+      .replace('Hello!', 'Bună ziua!')
+      .replace('I would like to book', 'Vreau să rezerv')
+      .replace('I want to', 'Vreau să');
+  }
 
   if (typeof smartsupp === 'function') {
     smartsupp('chat:open');
     if (message) smartsupp('chat:message', message);
   } else {
-    alert("Chat is opening...\n\n" + message);
+    alert("Chat opening...\n\n" + message);
   }
 }
 
-// Initialize
-window.addEventListener('load', () => {
-  detectCountryAndLanguage();
-});
+// Initialize on load
+window.addEventListener('load', detectCountry);
 </script>
 
 <!-- NAV -->
@@ -179,23 +169,42 @@ window.addEventListener('load', () => {
     <button onclick="openChat('Hello! I would like to book an appearance with Daniel Balaș.')" 
             class="btn-gold px-6 py-3 rounded text-sm flex items-center gap-2">
       <i class="fas fa-calendar-check"></i>
-      <span>Book Now</span>
+      <span id="bookNowBtn">Book Now</span>
     </button>
   </div>
 </nav>
 
-<!-- HERO + other sections remain the same as before, but you can add more id/classes for translation if needed -->
+<!-- HERO (English by default - will be updated via JS if Romanian) -->
+<section class="min-h-screen flex items-center pt-20 bg-gradient-to-br from-black via-[#0a0800] to-black">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <p id="heroTag" class="uppercase tracking-[0.25em] text-gold text-sm mb-6">Former Priest • Creator • Author</p>
+    
+    <h1 class="font-display text-7xl md:text-[5.5rem] font-black leading-none mb-8">
+      Daniel<br><span class="ggt">Balaș</span>
+    </h1>
+    
+    <p id="heroQuote" class="max-w-lg mx-auto text-xl text-light/70 italic mb-12">
+      “Only when you start loving yourself the way God loves you, do you reveal the diamond of divinity within you.”
+    </p>
 
-<!-- Example button in Meet & Greet section -->
-<button onclick="openChat('Hello! I would like to book the Standard Meet & Greet for €350.')" 
-        class="w-full py-4 btn-outline text-sm font-medium">Book Standard</button>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button onclick="openChat('Hello! I want to book a Meet & Greet with Daniel.')" 
+              class="btn-gold px-10 py-5 text-lg flex items-center justify-center gap-3">
+        <i class="fas fa-handshake"></i> <span id="ctaMeet">Meet & Greet</span>
+      </button>
+      <a href="#story" class="btn-outline px-10 py-5 text-lg flex items-center justify-center gap-3 hover:bg-white/5">
+        <span id="ctaStory">His Story</span> <i class="fas fa-arrow-down"></i>
+      </a>
+    </div>
+  </div>
+</section>
 
-<!-- Keep the rest of your sections (hero, story, book, meet, events, footer) exactly as in the previous version -->
+<!-- Add the rest of your sections (story, book, meet, events, footer) here as in the previous minimal version -->
 
-<!-- Footer remains the same -->
+<!-- FOOTER (same as before) -->
 
 <script>
-// You can expand the translations object and DOM updates as you add more Romanian text
+// You can extend applyLanguage() with more document.getElementById() updates for Romanian text
 </script>
 
 </body>
